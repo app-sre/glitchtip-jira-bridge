@@ -1,0 +1,67 @@
+[tool.poetry]
+name = "glitchtip-jira-bridge"
+version = "0.1.0"
+description = "The Glitchtip-Jira-Bridge seamlessly processes Glitchtip alerts through webhooks, transforming them into detailed, actionable Jira tickets."
+authors = ["Christian Assing <cassing@redhat.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{ include = "glitchtip_jira_bridge" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.103.2"
+celery = { extras = ["sqs"], version = "^5.3.4" }
+jira = "^3.5.2"
+uvicorn = "^0.23.2"
+pydantic = "^2.4.2"
+pydantic-settings = "^2.0.3"
+pycurl = "^7.45.2"
+prometheus-fastapi-instrumentator = "^6.1.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.2"
+mypy = "^1.5.1"
+flake8 = "^6.1.0"
+pylint = "^3.0.0"
+black = "^23.9.1"
+isort = "^5.12.0"
+rich = "^13.6.0"
+httpx = "^0.25.0"
+pytest-cov = "^4.1.0"
+pytest-mock = "^3.11.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+plugins = "pydantic.mypy"
+enable_error_code = "truthy-bool, redundant-expr"
+no_implicit_optional = true
+check_untyped_defs = true
+warn_unused_ignores = true
+show_error_codes = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[[tool.mypy.overrides]]
+module = ["celery.*", "requests.*", "boto3.*"]
+ignore_missing_imports = true
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+force_grid_wrap = 2
+float_to_top = true
+
+[tool.pylint."messages control"]
+disable = [
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "too-few-public-methods",
+    "logging-fstring-interpolation",
+]
+
+[tool.pytest.ini_options]
+addopts = "-p no:warnings"
