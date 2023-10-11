@@ -7,13 +7,13 @@ All configuration is done through environment variables.
 
 The following table lists the available environment variables for the FastAPI web application:
 
-| Environment variable | Description                                                                    | Default value                |
-| -------------------- | ------------------------------------------------------------------------------ | ---------------------------- |
-| GJB_START_MODE       | Start mode for the application (web or worker)                                 | `web`                        |
-| GJB_UVICORN_OPTS     | Uvicorn options for the web application                                        | `--host 0.0.0.0 --port 8080` |
-| GJB_DEBUG            | Enable debug logging (`0 = false; 1 = true`)                                   | `0`                          |
-| GJB_ROOT_PATH        | Root path for the application                                                  | `/`                          |
-| GJB_API_KEYS         | List of API keys that are allowed to access the application (JSON string list) |                              |
+| Environment variable | Description                                                                                                           | Default value                |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| GJB_START_MODE       | Start mode for the application (web or worker)                                                                        | `web`                        |
+| GJB_UVICORN_OPTS     | Uvicorn options for the web application                                                                               | `--host 0.0.0.0 --port 8080` |
+| GJB_DEBUG            | Enable debug logging (`0 = false; 1 = true`)                                                                          | `0`                          |
+| GJB_ROOT_PATH        | Root path for the application                                                                                         | `/`                          |
+| GJB_API_KEYS         | List of API keys that are allowed to access the application (JSON string list); See [Authentication](#authentication) |                              |
 
 The available [Celery](https://docs.celeryq.dev/en/stable/index.html) worker options:
 
@@ -49,6 +49,10 @@ Cache configuration:
 > [!WARNING]
 >
 > **DynamoDB** is the only supported cache backend at the moment.
+
+# Authentication
+
+The application supports API key authentication. The key is passed as `Authentication` HTTP header (`Authentication: Bearer XXX`) or via `token` query parameter (`?token=XXX`).
 
 # Development
 
