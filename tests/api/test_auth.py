@@ -15,9 +15,9 @@ def test_authentication_via_query_param(
     config_api_key: list[str], client: TestClient
 ) -> None:
     for secret in config_api_key:
-        response = client.get("/api/v1/", params={"key": secret})
+        response = client.get("/api/v1/", params={"token": secret})
     assert response.status_code == 200
-    response = client.get("/api/v1/", params={"key": "wrong"})
+    response = client.get("/api/v1/", params={"token": "wrong"})
     assert response.status_code == 401
 
 

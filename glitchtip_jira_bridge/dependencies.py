@@ -12,16 +12,16 @@ oauth2_scheme = OAuth2PasswordBearer(
 )  # use token authentication
 
 
-def auth_query_param(key: str | None = None) -> str | None:
-    return key
+def auth_query_param(token: str | None = None) -> str | None:
+    return token
 
 
 def api_key_auth(
-    key_via_header: str | None = Depends(oauth2_scheme),
-    key_via_param: str | None = Depends(auth_query_param),
+    token_via_header: str | None = Depends(oauth2_scheme),
+    token_via_param: str | None = Depends(auth_query_param),
 ) -> None:
-    api_key = key_via_header or key_via_param
-    if not api_key or api_key not in settings.api_keys:
+    token = token_via_header or token_via_param
+    if not token or token not in settings.api_keys:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Forbidden"
         )
