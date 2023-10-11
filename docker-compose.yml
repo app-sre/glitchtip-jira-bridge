@@ -11,16 +11,8 @@ services:
       - DEBUG=${DEBUG-}
       - DOCKER_HOST=unix:///var/run/docker.sock
       - SERVICES=${SERVICES:-sqs,dynamodb}
+      - PERSISTENCE=${PERSISTENCE:-0}
     volumes:
       - "${LOCALSTACK_VOLUME_DIR:-./localstack_volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
-
-  init-queue:
-    image: localstack/localstack
-    entrypoint: /bin/bash
-    command: -c "awslocal sqs create-queue --queue-name app-interface; awslocal dynamodb create-table --table-name gjb --attribute-definitions AttributeName=key,AttributeType=S --key-schema AttributeName=key,KeyType=HASH --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --table-class STANDARD; awslocal dynamodb update-time-to-live --table-name gjb --time-to-live-specification 'Enabled=true, AttributeName=ttl'"
-    environment:
-      - LOCALSTACK_HOST=localstack
-    depends_on:
-      localstack:
-        condition: service_started
+      - ./localstack:/etc/localstack/init/ready.d
