@@ -16,3 +16,37 @@ services:
       - "${LOCALSTACK_VOLUME_DIR:-./localstack_volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
       - ./localstack:/etc/localstack/init/ready.d
+
+  web:
+    env_file:
+      - settings.conf
+    environment:
+      - GJB_BROKER_URL=sqs://localstack:4566
+      - GJB_SQS_URL=http://localstack:4566/000000000000/app-interface
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - localstack
+    volumes:
+      - ./glitchtip_jira_bridge:/code/glitchtip_jira_bridge
+
+  worker:
+    env_file:
+      - settings.conf
+    environment:
+      - GJB_START_MODE=worker
+      - GJB_BROKER_URL=sqs://localstack:4566
+      - GJB_SQS_URL=http://localstack:4566/000000000000/app-interface
+      - GJB_DYNAMODB_URL=http://localstack:4566
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - localstack
+    volumes:
+      - ./glitchtip_jira_bridge:/code/glitchtip_jira_bridge
