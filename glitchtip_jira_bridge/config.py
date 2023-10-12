@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     broker_aws_region: str = "us-east-1"
     broker_aws_access_key_id: str = "localstack"
     broker_aws_secret_access_key: str = "localstack"
-    retries: int = 3
+    retries: int | None = None
     retry_delay: int = 10
 
     # cache config
