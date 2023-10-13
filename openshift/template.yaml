@@ -58,6 +58,7 @@ objects:
           envFrom:
             - secretRef:
                 name: glitchtip-jira-bridge-secret
+                optional: true
             - configMapRef:
                 name: glitchtip-jira-bridge-config
                 optional: true
@@ -164,6 +165,7 @@ objects:
           envFrom:
             - secretRef:
                 name: glitchtip-jira-bridge-secret
+                optional: true
             - configMapRef:
                 name: glitchtip-jira-bridge-config
                 optional: true
@@ -202,7 +204,7 @@ objects:
     labels:
       app.kubernetes.io/component: worker
       app.kubernetes.io/name: glitchtip-jira-bridge
-    name: glitchtip-jira-bridge-web
+    name: glitchtip-jira-bridge-worker
   spec:
     ports:
     - name: "8000"
