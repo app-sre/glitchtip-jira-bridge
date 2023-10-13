@@ -30,6 +30,9 @@ class Settings(BaseSettings):
     jira_api_url: str = "https://issues.stage.redhat.com"
     jira_api_key: str = ""
 
+    # worker metrics config
+    worker_metrics_port: int = 8000
+
     # pydantic config
     model_config = {"env_prefix": "gjb_"}
 

@@ -29,6 +29,7 @@ app = Celery(
         },
     },
     broker_connection_retry_on_startup=True,
+    worker_enable_remote_control=False,
     # support pydantic models
     task_serializer="pickle",
     result_serializer="pickle",
