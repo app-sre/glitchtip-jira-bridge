@@ -9,7 +9,9 @@ if [ -r "settings.conf" ]; then
 fi
 
 START_MODE="${GJB_START_MODE:-web}"
-UVICORN_OPTS="${GJB_UVICORN_OPTS:- --host 0.0.0.0 --port 8080}"
+APP_PORT="${GJB_APP_PORT:-8080}"
+UVICORN_OPTS="${GJB_UVICORN_OPTS:- --host 0.0.0.0}"
+UVICORN_OPTS="${UVICORN_OPTS} --port ${APP_PORT}"
 # start celery worker with solo pool by default to ensure only one worker is running
 # we scale the number of workers using kubernetes pods
 # this also ensures prometheus metrics are working
