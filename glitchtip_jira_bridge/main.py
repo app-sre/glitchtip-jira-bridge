@@ -37,9 +37,9 @@ def create_app() -> FastAPI:
     fast_api_app.include_router(default_router)
     fast_api_app.include_router(router, prefix="/api", dependencies=dependencies)
 
-    instrumentator = Instrumentator(excluded_handlers=["/metrics"]).instrument(
-        fast_api_app
-    )
+    instrumentator = Instrumentator(
+        excluded_handlers=["/metrics", "/healthz"]
+    ).instrument(fast_api_app)
 
     @fast_api_app.on_event("startup")
     async def _startup() -> None:
