@@ -44,7 +44,9 @@ def create_jira_ticket(
     self: Task, jira_project_key: str, alert: GlitchtipAlert
 ) -> None:
     """Create a Jira ticket."""
-    log.info(f"Handling alert '{alert.text}' for '{jira_project_key}' jira project")
+    log.info(
+        f"Handling alert '{alert.issue_text}' for '{jira_project_key}' jira project"
+    )
     processed_alerts.labels(jira_project_key).inc()
     try:
         create_issue(
