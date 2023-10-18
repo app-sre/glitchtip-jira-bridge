@@ -4,8 +4,10 @@ if [[ "${GJB_DEBUG}" == "1" ]]; then
 fi
 
 if [ -r "settings.conf" ]; then
+    set -a
     # shellcheck source=/dev/null
     . settings.conf
+    set +a
 fi
 
 START_MODE="${GJB_START_MODE:-web}"
