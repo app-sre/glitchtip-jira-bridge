@@ -1,8 +1,12 @@
+from typing import Any
+
+import pytest
 from pytest_mock import MockerFixture
 
 from glitchtip_jira_bridge.backends.db import (
     Db,
     IssueCache,
+    Limits,
 )
 from glitchtip_jira_bridge.models import Issue
 
@@ -60,3 +64,22 @@ def test_issue_cache_set(mocker: MockerFixture) -> None:
         pk="https://glitchtip.example.com/issue/123",
         data={"jira_key": "JIRA-123", "ttl": time_mock.time() + 10},
     )
+
+
+@pytest.mark.parametrize(
+    "db_entry, excpected_is_allowed",
+    [
+        ({}, True),
+        ({"request_count": 9}, True),
+        ({"request_count": 10}, False),
+        ({"request_count": 11}, False),
+    ],
+)
+def test_limits_is_allowed(
+    mocker: MockerFixture, db_entry: dict[str, Any], excpected_is_allowed: bool
+) -> None:
+    backend_mock = mocker.MagicMock()
+    limits = Limits(backend_mock, 10)
+    backend_mock.get.return_value = db_entry
+
+    assert limits.is_allowed("PROJECT") == excpected_is_allowed
