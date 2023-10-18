@@ -26,6 +26,7 @@ def test_create_jira_ticket(
         labels=["glitchtip"] + glitchtip_alert.labels,
         jira=mocker.ANY,
         issue_cache=mocker.ANY,
+        limits=mocker.ANY,
     )
 
 

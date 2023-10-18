@@ -5,9 +5,10 @@ from celery import Celery
 from celery.app.task import Task
 from jira import JIRA
 
-from .backends.cache import (
-    Cache,
+from .backends.db import (
+    Db,
     IssueCache,
+    Limits,
 )
 from .backends.jira import create_issue
 from .config import settings
@@ -49,6 +50,13 @@ def create_jira_ticket(
     )
     processed_alerts.labels(jira_project_key).inc()
     try:
+        dyn_resource = boto3.resource(
+            "dynamodb",
+            endpoint_url=settings.dynamodb_url,
+            region_name=settings.dynamodb_aws_region,
+            aws_access_key_id=settings.dynamodb_aws_access_key_id,
+            aws_secret_access_key=settings.dynamodb_aws_secret_access_key,
+        )
         create_issue(
             project_key=jira_project_key,
             summary=alert.issue_title,
@@ -60,17 +68,18 @@ def create_jira_ticket(
                 token_auth=settings.jira_api_key,
             ),
             issue_cache=IssueCache(
-                cache_backend=Cache(
-                    dyn_resource=boto3.resource(
-                        "dynamodb",
-                        endpoint_url=settings.dynamodb_url,
-                        region_name=settings.dynamodb_aws_region,
-                        aws_access_key_id=settings.dynamodb_aws_access_key_id,
-                        aws_secret_access_key=settings.dynamodb_aws_secret_access_key,
-                    ),
-                    table_name=settings.dynamodb_table_name,
+                backend=Db(
+                    dyn_resource=dyn_resource,
+                    table_name=settings.cache_table_name,
                 ),
                 ttl=settings.cache_ttl,
+            ),
+            limits=Limits(
+                backend=Db(
+                    dyn_resource=dyn_resource,
+                    table_name=settings.limits_table_name,
+                ),
+                limit=settings.issues_per_project_limit,
             ),
         )
     except Exception as exc:

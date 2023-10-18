@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from pydantic_settings import BaseSettings
 
 
@@ -20,11 +22,13 @@ class Settings(BaseSettings):
 
     # cache config
     dynamodb_url: str = "http://localhost:4566"
-    dynamodb_table_name: str = "gjb"
     dynamodb_aws_region: str = "us-east-1"
     dynamodb_aws_access_key_id: str = "localstack"
     dynamodb_aws_secret_access_key: str = "localstack"
-    cache_ttl: int = 60 * 60 * 2  # 2 hours
+    cache_table_name: str = "gjb"
+    cache_ttl: int = int(timedelta(hours=2).total_seconds())
+    limits_table_name: str = "limits"
+    issues_per_project_limit: int = 10
 
     # jira config
     jira_api_url: str = "https://issues.stage.redhat.com"

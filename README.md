@@ -104,7 +104,7 @@ export GJB_DEBUG=1
 Start a local AWS environment with the following command:
 
 ```bash
-$ docker compose up
+$ docker compose up localstack
 ```
 
 ## Glitchtip Jira Bridge Web and Worker
