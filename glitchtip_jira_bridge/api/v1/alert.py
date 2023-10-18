@@ -30,4 +30,5 @@ def handle_alert(
     create_jira_ticket: Task = Depends(get_create_jira_ticket_func),
 ) -> None:
     """Create new snapshot on all volumes."""
-    create_jira_ticket.delay(jira_project_key, alert)
+    for attachment in alert.attachments:
+        create_jira_ticket.delay(jira_project_key, attachment)
