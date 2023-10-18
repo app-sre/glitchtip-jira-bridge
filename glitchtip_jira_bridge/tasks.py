@@ -12,7 +12,7 @@ from .backends.db import (
 )
 from .backends.jira import create_issue
 from .config import settings
-from .metrics import processed_alerts
+from .metrics import received_alerts
 from .models import GlitchtipAlert
 
 log = logging.getLogger(__name__)
@@ -48,7 +48,7 @@ def create_jira_ticket(
     log.info(
         f"Handling alert '{alert.issue_text}' for '{jira_project_key}' jira project"
     )
-    processed_alerts.labels(jira_project_key).inc()
+    received_alerts.labels(jira_project_key).inc()
     try:
         dyn_resource = boto3.resource(
             "dynamodb",
