@@ -13,7 +13,7 @@ from .backends.db import (
 from .backends.jira import create_issue
 from .config import settings
 from .metrics import received_alerts
-from .models import GlitchtipAlert
+from .models import Attachment
 
 log = logging.getLogger(__name__)
 app = Celery(
@@ -41,13 +41,9 @@ app = Celery(
 
 
 @app.task(bind=True)
-def create_jira_ticket(
-    self: Task, jira_project_key: str, alert: GlitchtipAlert
-) -> None:
+def create_jira_ticket(self: Task, jira_project_key: str, issue: Attachment) -> None:
     """Create a Jira ticket."""
-    log.info(
-        f"Handling alert '{alert.issue_text}' for '{jira_project_key}' jira project"
-    )
+    log.info(f"Handling alert '{issue.text}' for '{jira_project_key}' jira project")
     received_alerts.labels(jira_project_key).inc()
     try:
         dyn_resource = boto3.resource(
@@ -59,10 +55,10 @@ def create_jira_ticket(
         )
         create_issue(
             project_key=jira_project_key,
-            summary=alert.issue_title,
-            description=f"{alert.issue_text}\n-----\nGlitchtip issue: {alert.issue_url}",
-            url=alert.issue_url,
-            labels=["glitchtip"] + alert.labels,
+            summary=issue.title,
+            description=f"{issue.text}\n-----\nGlitchtip issue: {issue.title_link}",
+            url=issue.title_link,
+            labels=["glitchtip"] + issue.labels,
             jira=JIRA(
                 server=settings.jira_api_url,
                 token_auth=settings.jira_api_key,

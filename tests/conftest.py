@@ -4,7 +4,10 @@ from fastapi.testclient import TestClient
 from glitchtip_jira_bridge.config import Settings
 from glitchtip_jira_bridge.config import settings as current_settings
 from glitchtip_jira_bridge.main import create_app
-from glitchtip_jira_bridge.models import GlitchtipAlert
+from glitchtip_jira_bridge.models import (
+    Attachment,
+    GlitchtipAlert,
+)
 
 
 @pytest.fixture
@@ -30,42 +33,47 @@ def config_debug(settings: Settings) -> bool:
 
 
 @pytest.fixture
-def glitchtip_alert() -> GlitchtipAlert:
+def issue() -> Attachment:
+    return Attachment(
+        **dict(
+            title="issue title",
+            title_link="https://glitchtip.devshift.net/app-sre/issues/12345",
+            text="issue text",
+            image_url="https://google.com",
+            color="#FF0000",
+            fields=[
+                dict(
+                    title="test",
+                    value="test",
+                    short=True,
+                ),
+                dict(
+                    title="Project",
+                    value="test-project",
+                    short=True,
+                ),
+                dict(
+                    title="Release",
+                    value="test-release",
+                    short=True,
+                ),
+                dict(
+                    title="Environment",
+                    value="test-environment",
+                    short=True,
+                ),
+            ],
+            mrkdown_in=["text"],
+        )
+    )
+
+
+@pytest.fixture
+def glitchtip_alert(issue: Attachment) -> GlitchtipAlert:
     return GlitchtipAlert(
         **dict(
             alias="test alias",
             text="test text",
-            attachments=[
-                dict(
-                    title="issue title",
-                    title_link="https://glitchtip.devshift.net/app-sre/issues/12345",
-                    text="issue text",
-                    image_url="https://google.com",
-                    color="#FF0000",
-                    fields=[
-                        dict(
-                            title="test",
-                            value="test",
-                            short=True,
-                        ),
-                        dict(
-                            title="Project",
-                            value="test-project",
-                            short=True,
-                        ),
-                        dict(
-                            title="Release",
-                            value="test-release",
-                            short=True,
-                        ),
-                        dict(
-                            title="Environment",
-                            value="test-environment",
-                            short=True,
-                        ),
-                    ],
-                    mrkdown_in=["text"],
-                )
-            ],
+            attachments=[issue.model_dump()],
         ),
     )
