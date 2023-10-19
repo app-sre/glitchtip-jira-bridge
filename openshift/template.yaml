@@ -267,12 +267,12 @@ parameters:
 
 - name: GJB_WORKER_MEMORY_REQUESTS
   description: Worker memory requests
-  value: "1200Mi"
+  value: "200Mi"
   required: true
 
 - name: GJB_WORKER_MEMORY_LIMITS
   description: Worker memory limits
-  value: "1200Mi"
+  value: "200Mi"
   required: true
 
 - name: GJB_WORKER_CPU_REQUESTS
