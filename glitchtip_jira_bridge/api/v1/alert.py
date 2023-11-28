@@ -1,10 +1,12 @@
 import logging
 from collections.abc import Callable
+from typing import Annotated
 
 from celery import Task
 from fastapi import (
     APIRouter,
     Depends,
+    Query,
 )
 
 from ...models import GlitchtipAlert
@@ -27,8 +29,9 @@ def get_create_jira_ticket_func() -> Callable:
 def handle_alert(
     jira_project_key: str,
     alert: GlitchtipAlert,
+    labels: Annotated[list[str] | None, Query()] = None,
     create_jira_ticket: Task = Depends(get_create_jira_ticket_func),
 ) -> None:
     """Create new snapshot on all volumes."""
     for attachment in alert.attachments:
-        create_jira_ticket.delay(jira_project_key, attachment)
+        create_jira_ticket.delay(jira_project_key, attachment, labels or [])
