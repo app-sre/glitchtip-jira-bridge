@@ -198,12 +198,18 @@ objects:
                 key message
                 pattern /: GJB\]/
               </regexp>
+            </filter>
 
+            <filter integration>
+              @type grep
               <exclude>
                 key message
                 pattern /Connected to sqs/
               </exclude>
+            </filter>
 
+            <filter integration>
+              @type grep
               <exclude>
                 key message
                 pattern /celery@.*ready/
