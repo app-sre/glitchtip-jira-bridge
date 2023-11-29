@@ -89,10 +89,10 @@ $ pip install --no-cache-dir pycurl
 ```
 ## Local configuration
 
-Get a personal access token from [staging Jira](https://issues.stage.redhat.com) and add it to a local `src/settings.conf` file:
+Get a personal access token from [staging Jira](https://issues.stage.redhat.com) and add it to a local `settings.conf` file:
 
 ```bash
-$ cat src/settings.conf
+$ cat settings.conf
 export GJB_JIRA_API_KEY="<YOUR PERSONAL STAGING JIRA ACCESS TOKEN>"
 export HTTPS_PROXY=squid.corp.redhat.com:3128
 export GJB_DEBUG=1
@@ -112,13 +112,11 @@ $ docker compose up localstack
 Start the web part of the application in one terminal:
 
 ```bash
-$ cd src
 $ GJB_START_MODE=web ./app.sh
 ```
 
 And a celery worker in another terminal:
 
 ```bash
-$ cd src
 $ GJB_START_MODE=worker ./app.sh
 ```

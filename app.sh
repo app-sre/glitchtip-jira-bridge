@@ -22,6 +22,10 @@ CELERY_OPTS="${GJB_CELERY_OPTS:- --loglevel=info --pool solo}"
 if [ -n "${GJB_DEBUG}" ]; then
     UVICORN_OPTS="${UVICORN_OPTS} --log-level debug --reload"
 fi
+if [ -n "${LOG_FILE}" ]; then
+    # redirect stdout and stderr to log file
+    exec &> >(tee "${LOG_FILE}")
+fi
 if [[ "${START_MODE}" == "web" ]]; then
     echo "---> Serving application with uvicorn ..."
     # shellcheck disable=SC2086

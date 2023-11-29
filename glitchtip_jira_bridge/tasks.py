@@ -31,6 +31,7 @@ app = Celery(
     },
     broker_connection_retry_on_startup=True,
     worker_enable_remote_control=False,
+    worker_log_format="[%(asctime)s: GJB] %(message)s",
     # support pydantic models
     task_serializer="pickle",
     result_serializer="pickle",
