@@ -41,15 +41,23 @@ def test_handle_alert(
                 )
             ],
         ),
-        params=dict(labels=["test-label"]),
+        params=dict(
+            labels=["test-label"],
+            components=["test-component", "test-component-2"],
+            issue_type="issue-type",
+        ),
     )
     assert response.status_code == 202
     task_mock.delay.assert_called_once_with(
-        "JIRA-PROJECT-KEY", mocker.ANY, ["test-label"]
+        "JIRA-PROJECT-KEY",
+        mocker.ANY,
+        ["test-label"],
+        ["test-component", "test-component-2"],
+        "issue-type",
     )
 
 
-def test_handle_alert_no_labels(
+def test_handle_alert_no_optional_fields(
     mocker: MockerFixture, config_api_key: list[str], client: TestClient
 ) -> None:
     task_mock = mocker.MagicMock(Task, autospec=True)
@@ -87,4 +95,6 @@ def test_handle_alert_no_labels(
         ),
     )
     assert response.status_code == 202
-    task_mock.delay.assert_called_once_with("JIRA-PROJECT-KEY", mocker.ANY, [])
+    task_mock.delay.assert_called_once_with(
+        "JIRA-PROJECT-KEY", mocker.ANY, [], [], "Bug"
+    )

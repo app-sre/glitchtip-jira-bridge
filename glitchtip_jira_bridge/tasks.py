@@ -43,7 +43,12 @@ app = Celery(
 
 @app.task(bind=True)
 def create_jira_ticket(
-    self: Task, jira_project_key: str, issue: Attachment, custom_labels: list[str]
+    self: Task,
+    jira_project_key: str,
+    issue: Attachment,
+    custom_labels: list[str],
+    components: list[str],
+    issue_type: str,
 ) -> None:
     """Create a Jira ticket."""
     log.info(f"Handling alert '{issue.text}' for '{jira_project_key}' jira project")
@@ -62,6 +67,8 @@ def create_jira_ticket(
             description=f"{issue.text}\n-----\nGlitchtip issue: {issue.title_link}",
             url=issue.title_link,
             labels=["glitchtip"] + issue.labels + custom_labels,
+            components=components,
+            issue_type=issue_type,
             jira=JIRA(
                 server=settings.jira_api_url,
                 token_auth=settings.jira_api_key,

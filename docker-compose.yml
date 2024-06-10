@@ -18,6 +18,7 @@ services:
       - ./localstack:/etc/localstack/init/ready.d
 
   web:
+    restart: always
     env_file:
       - settings.conf
     environment:
@@ -26,6 +27,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: release
     ports:
       - "8080:8080"
     depends_on:
@@ -34,6 +36,7 @@ services:
       - ./glitchtip_jira_bridge:/code/glitchtip_jira_bridge
 
   worker:
+    restart: always
     env_file:
       - settings.conf
     environment:
@@ -44,6 +47,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: release
     ports:
       - "8000:8000"
     depends_on:

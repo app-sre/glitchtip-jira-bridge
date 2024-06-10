@@ -30,8 +30,16 @@ def handle_alert(
     jira_project_key: str,
     alert: GlitchtipAlert,
     labels: Annotated[list[str] | None, Query()] = None,
+    components: Annotated[list[str] | None, Query()] = None,
+    issue_type: Annotated[str | None, Query()] = None,
     create_jira_ticket: Task = Depends(get_create_jira_ticket_func),
 ) -> None:
     """Create new snapshot on all volumes."""
     for attachment in alert.attachments:
-        create_jira_ticket.delay(jira_project_key, attachment, labels or [])
+        create_jira_ticket.delay(
+            jira_project_key,
+            attachment,
+            labels or [],
+            components or [],
+            issue_type or "Bug",
+        )
