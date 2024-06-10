@@ -42,7 +42,7 @@ app = Celery(
 
 
 @app.task(bind=True)
-def create_jira_ticket(
+def create_jira_ticket(  # pylint: disable=too-many-arguments
     self: Task,
     jira_project_key: str,
     issue: Attachment,

@@ -26,7 +26,7 @@ def get_create_jira_ticket_func() -> Callable:
     summary="Create a Jira ticket.",
     status_code=202,
 )
-def handle_alert(
+def handle_alert(  # pylint: disable=too-many-arguments
     jira_project_key: str,
     alert: GlitchtipAlert,
     labels: Annotated[list[str] | None, Query()] = None,
