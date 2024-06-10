@@ -1,5 +1,8 @@
 import logging
-from typing import Any, cast
+from typing import (
+    Any,
+    cast,
+)
 
 from jira import JIRA
 from jira.client import ResultList
