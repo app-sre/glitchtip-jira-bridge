@@ -1,5 +1,8 @@
 import logging
-from typing import cast
+from typing import (
+    Any,
+    cast,
+)
 
 from jira import JIRA
 from jira.client import ResultList
@@ -24,6 +27,8 @@ def create_issue(  # pylint: disable=too-many-arguments
     description: str,
     url: str,
     labels: list[str],
+    components: list[str],
+    issue_type: str,
     jira: JIRA,
     issue_cache: IssueCache,
     limits: Limits,
@@ -44,12 +49,18 @@ def create_issue(  # pylint: disable=too-many-arguments
             return
         # create new ticket
         log.info(f"Creating new Jira ticket for {url}")
+        extra_fields: dict[str, Any] = {}
+        if components:
+            extra_fields["components"] = [
+                {"name": component} for component in components
+            ]
         issue = jira.create_issue(
             project=project_key,
             summary=summary,
             description=description,
             labels=labels + [url],
-            issuetype={"name": "Bug"},
+            issuetype={"name": issue_type},
+            **extra_fields,
         )
         tickets_created.labels(project_key).inc()
         log.info(f"Jira ticket created {issue.key} ({issue.permalink()})")

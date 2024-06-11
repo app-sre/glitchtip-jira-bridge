@@ -13,7 +13,11 @@ def test_create_jira_ticket(mocker: MockerFixture, issue: Attachment) -> None:
     mocker.patch("glitchtip_jira_bridge.tasks.boto3", autospec=True)
 
     create_jira_ticket(
-        jira_project_key="TEST", issue=issue, custom_labels=["custom-label-1"]
+        jira_project_key="TEST",
+        issue=issue,
+        custom_labels=["custom-label-1"],
+        components=["component-1"],
+        issue_type="issue-type",
     )
 
     create_issue_mock.assert_called_once_with(
@@ -22,6 +26,8 @@ def test_create_jira_ticket(mocker: MockerFixture, issue: Attachment) -> None:
         description="issue text\n-----\nGlitchtip issue: https://glitchtip.devshift.net/app-sre/issues/12345",
         url="https://glitchtip.devshift.net/app-sre/issues/12345",
         labels=["glitchtip"] + issue.labels + ["custom-label-1"],
+        components=["component-1"],
+        issue_type="issue-type",
         jira=mocker.ANY,
         issue_cache=mocker.ANY,
         limits=mocker.ANY,
@@ -38,5 +44,9 @@ def test_create_jira_ticket_retry(mocker: MockerFixture, issue: Attachment) -> N
 
     with pytest.raises(ValueError):
         create_jira_ticket(
-            jira_project_key="TEST", issue=issue, custom_labels=["custom-label-1"]
+            jira_project_key="TEST",
+            issue=issue,
+            custom_labels=["custom-label-1"],
+            components=["component-1"],
+            issue_type="issue-type",
         )
