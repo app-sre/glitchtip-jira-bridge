@@ -54,7 +54,7 @@ def create_jira_ticket(  # pylint: disable=too-many-arguments
     log.info(f"Handling alert '{issue.text}' for '{jira_project_key}' jira project")
     received_alerts.labels(jira_project_key).inc()
     try:
-        dyn_resource = boto3.resource(
+        dynamodb_service_resource = boto3.resource(
             "dynamodb",
             endpoint_url=settings.dynamodb_url,
             region_name=settings.dynamodb_aws_region,
@@ -75,14 +75,14 @@ def create_jira_ticket(  # pylint: disable=too-many-arguments
             ),
             issue_cache=IssueCache(
                 backend=Db(
-                    dyn_resource=dyn_resource,
+                    dynamodb_service_resource=dynamodb_service_resource,
                     table_name=settings.cache_table_name,
                 ),
                 ttl=settings.cache_ttl,
             ),
             limits=Limits(
                 backend=Db(
-                    dyn_resource=dyn_resource,
+                    dynamodb_service_resource=dynamodb_service_resource,
                     table_name=settings.limits_table_name,
                 ),
                 limit=settings.issues_per_project_limit,

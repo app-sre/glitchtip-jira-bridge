@@ -18,18 +18,18 @@ class Attachment(BaseModel):
 
     @property
     def labels(self) -> list[str]:
-        l: list[str] = []
+        _labels: list[str] = []
         for f in self.fields or []:
             match f.title.lower():
                 case "project":
-                    l.append(f"project:{f.value}")
+                    _labels.append(f"project:{f.value}")
                 case "release":
-                    l.append(f"release:{f.value}")
+                    _labels.append(f"release:{f.value}")
                 case "environment":
-                    l.append(f"environment:{f.value}")
+                    _labels.append(f"environment:{f.value}")
                 case _:
                     pass
-        return l
+        return _labels
 
 
 class GlitchtipAlert(BaseModel):

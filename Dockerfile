@@ -62,5 +62,5 @@ FROM build-base-python as test-image
 RUN poetry install --no-interaction --no-ansi
 # install the tests
 COPY --chown=app:app tests /code/tests/
-COPY --chown=app:app Makefile setup.cfg /code/
+COPY --chown=app:app Makefile /code/
 USER app:app

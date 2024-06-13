@@ -3,16 +3,21 @@ from datetime import (
     datetime,
     timedelta,
 )
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from boto3.resources.base import ServiceResource
+if TYPE_CHECKING:
+    from mypy_boto3_dynamodb import DynamoDBServiceResource
+else:
+    DynamoDBServiceResource = object
 
 from ..models import Issue
 
 
 class Db:
-    def __init__(self, dyn_resource: ServiceResource, table_name: str) -> None:
-        self.table = dyn_resource.Table(table_name)
+    def __init__(
+        self, dynamodb_service_resource: DynamoDBServiceResource, table_name: str
+    ) -> None:
+        self.table = dynamodb_service_resource.Table(table_name)
         self.table.load()
 
     def get(self, pk: str) -> dict | None:
