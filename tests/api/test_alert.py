@@ -1,3 +1,4 @@
+import requests
 from celery import Task
 from fastapi.testclient import TestClient
 from pytest_mock import MockerFixture
@@ -47,7 +48,7 @@ def test_handle_alert(
             issue_type="issue-type",
         ),
     )
-    assert response.status_code == 202
+    assert response.status_code == requests.codes.accepted
     task_mock.delay.assert_called_once_with(
         "JIRA-PROJECT-KEY",
         mocker.ANY,
@@ -94,7 +95,7 @@ def test_handle_alert_no_optional_fields(
             ],
         ),
     )
-    assert response.status_code == 202
+    assert response.status_code == requests.codes.accepted
     task_mock.delay.assert_called_once_with(
         "JIRA-PROJECT-KEY", mocker.ANY, [], [], "Bug"
     )

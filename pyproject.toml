@@ -21,20 +21,20 @@ prometheus-fastapi-instrumentator = "^6.1.0"
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
 mypy = "^1.5.1"
-flake8 = "^6.1.0"
-pylint = "^3.0.0"
-black = "^23.9.1"
-isort = "^5.12.0"
 rich = "^13.6.0"
 httpx = "^0.25.0"
 pytest-cov = "^4.1.0"
 pytest-mock = "^3.11.1"
+types-requests = "^2.32.0.20240602"
+boto3-stubs = { extras = ["dynamodb"], version = "^1.34.125" }
+ruff = "^0.4.8"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.mypy]
+files = ["glitchtip_jira_bridge"]
 plugins = "pydantic.mypy"
 enable_error_code = "truthy-bool, redundant-expr"
 no_implicit_optional = true
@@ -45,23 +45,54 @@ disallow_untyped_defs = true
 disallow_incomplete_defs = true
 
 [[tool.mypy.overrides]]
-module = ["celery.*", "requests.*", "boto3.*"]
+module = ["celery.*"]
 ignore_missing_imports = true
-
-[tool.isort]
-profile = "black"
-multi_line_output = 3
-force_grid_wrap = 2
-float_to_top = true
-
-[tool.pylint."messages control"]
-disable = [
-    "missing-module-docstring",
-    "missing-class-docstring",
-    "missing-function-docstring",
-    "too-few-public-methods",
-    "logging-fstring-interpolation",
-]
 
 [tool.pytest.ini_options]
 addopts = "-p no:warnings"
+
+# Coverage configuration
+[tool.coverage.run]
+branch = true
+omit = ["*/tests/*"]
+
+[tool.coverage.report]
+fail_under = 95
+
+# Ruff configuration
+[tool.ruff]
+line-length = 88
+target-version = 'py311'
+required-version = "0.4.8" # keep in sync with dev dependencies!
+src = ["glitchtip_jira_bridge"]
+extend-exclude = [
+    ".local", # used by poetry in local venv
+    ".cache", # used by poetry in local venv
+]
+fix = true
+
+[tool.ruff.lint]
+preview = true
+# defaults are ["E4", "E7", "E9", "F"]
+extend-select = [
+    # flake8 default rules
+    "E1", # preview rule
+    "E2", # preview rule
+    "W",
+    # isort
+    "I",
+    # pylint
+    "PL",
+    # pyupgrade
+    "UP",
+]
+ignore = [
+    "PLR0904", # Too many public methods
+    "PLR0913", # Too many arguments
+    "PLR0917", # Too many positional arguments
+]
+[tool.ruff.format]
+preview = true
+
+[tool.ruff.lint.isort]
+known-first-party = ["glitchtip_jira_bridge"]
