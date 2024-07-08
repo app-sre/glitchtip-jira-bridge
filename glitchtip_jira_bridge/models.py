@@ -10,7 +10,7 @@ class Field(BaseModel):
 class Attachment(BaseModel):
     title: str
     title_link: str
-    text: str
+    text: str | None
     image_url: str | None = None
     color: str | None = None
     fields: list[Field] | None = None

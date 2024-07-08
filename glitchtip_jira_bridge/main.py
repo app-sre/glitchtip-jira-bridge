@@ -5,7 +5,11 @@ from fastapi import (
     APIRouter,
     Depends,
     FastAPI,
+    Request,
+    status,
 )
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from prometheus_fastapi_instrumentator import Instrumentator
 
 from .api import router
@@ -44,6 +48,17 @@ def create_app() -> FastAPI:
     @fast_api_app.on_event("startup")
     async def _startup() -> None:
         instrumentator.expose(fast_api_app, include_in_schema=False)
+
+    @fast_api_app.exception_handler(RequestValidationError)
+    async def validation_exception_handler(
+        request: Request, exc: RequestValidationError
+    ) -> JSONResponse:
+        exc_str = f"{exc}".replace("\n", " ").replace("   ", " ")
+        logging.error(f"{request}: {exc_str}")
+        content = {"status_code": 422, "message": exc_str, "data": None}
+        return JSONResponse(
+            content=content, status_code=status.HTTP_422_UNPROCESSABLE_ENTITY
+        )
 
     return fast_api_app
 
