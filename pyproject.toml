@@ -9,7 +9,7 @@ packages = [{ include = "glitchtip_jira_bridge" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-fastapi = "^0.103.2"
+fastapi = "^0.109.1"
 celery = { extras = ["sqs"], version = "^5.3.4" }
 jira = "^3.5.2"
 uvicorn = "^0.23.2"
