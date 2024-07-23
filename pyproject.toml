@@ -69,6 +69,7 @@ src = ["glitchtip_jira_bridge"]
 extend-exclude = [
     ".local", # used by poetry in local venv
     ".cache", # used by poetry in local venv
+    ".venv",  # used by poetry
 ]
 fix = true
 

@@ -1,5 +1,6 @@
 FROM registry.access.redhat.com/ubi9/ubi-minimal:9.4 as base-python
-ENV PYTHONUNBUFFERED=1
+ENV PYTHONUNBUFFERED=1 \
+    PATH="/code/.venv/bin:$PATH"
 
 RUN microdnf upgrade -y && \
     microdnf install -y \
@@ -8,7 +9,8 @@ RUN microdnf upgrade -y && \
     microdnf clean all && \
     update-alternatives --install /usr/bin/python3 python /usr/bin/python3.11 1 && \
     ln -snf /usr/bin/python3.11 /usr/bin/python && \
-    python3 -m ensurepip
+    python3 -m ensurepip && \
+    pip3 install -U pip setuptools wheel poetry
 
 COPY LICENSE /licenses/
 WORKDIR /code
@@ -16,13 +18,8 @@ RUN useradd -u 5000 app && chown -R app:app /code
 
 # ---- Interims image to get and build all the python dependencies ----
 FROM base-python as build-base-python
-ENV POETRY_HOME=/opt/poetry \
-    POETRY_VIRTUALENVS_CREATE=false \
-    PIP_DISABLE_PIP_VERSION_CHECK=on \
-    PATH=/opt/poetry/bin:$PATH
-
-# install poetry
-RUN python3 - < <(curl -sSL https://install.python-poetry.org) && poetry --version
+ENV POETRY_VIRTUALENVS_IN_PROJECT=true \
+    PIP_DISABLE_PIP_VERSION_CHECK=on
 
 # install the dependencies
 RUN microdnf install -y \
@@ -43,11 +40,6 @@ RUN poetry install --no-interaction --no-ansi --only main
 # ---- Bundle everything together in the final image ----
 FROM base-python as release
 EXPOSE 8080
-
-# get all the python dependencies from the build-python stage
-COPY --from=build-base-python /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
-COPY --from=build-base-python /usr/local/lib64/python3.11/site-packages/ /usr/local/lib64/python3.11/site-packages/
-COPY --from=build-base-python /usr/local/bin/ /usr/local/bin/
 
 RUN microdnf install -y \
     libcurl-minimal \
