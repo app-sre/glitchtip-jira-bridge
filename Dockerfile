@@ -10,6 +10,7 @@ RUN microdnf upgrade -y && \
     ln -snf /usr/bin/python3.11 /usr/bin/python && \
     python3 -m ensurepip
 
+COPY LICENSE /licenses/
 WORKDIR /code
 RUN useradd -u 5000 app && chown -R app:app /code
 
