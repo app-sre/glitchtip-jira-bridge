@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/ubi-minimal:9.2 as base-python
+FROM registry.access.redhat.com/ubi9/ubi-minimal:9.4-1194 as base-python
 ENV PYTHONUNBUFFERED=1
 
 RUN microdnf upgrade -y && \
