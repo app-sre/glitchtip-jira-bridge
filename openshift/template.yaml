@@ -12,6 +12,7 @@ objects:
   kind: ServiceAccount
   metadata:
     name: glitchtip-jira-bridge-web
+    imagePullSecrets: "${{IMAGE_PULL_SECRETS}}"
     labels:
       app.kubernetes.io/component: web
       app.kubernetes.io/name: glitchtip-jira-bridge
@@ -119,6 +120,7 @@ objects:
   kind: ServiceAccount
   metadata:
     name: glitchtip-jira-bridge-worker
+    imagePullSecrets: "${{IMAGE_PULL_SECRETS}}"
     labels:
       app.kubernetes.io/component: worker
       app.kubernetes.io/name: glitchtip-jira-bridge
@@ -314,6 +316,11 @@ parameters:
   description: Image to use for glitchtip-jira-bridge
   value: "quay.io/app-sre/glitchtip-jira-bridge"
   required: true
+
+- name: IMAGE_PULL_SECRETS
+  description: Pull secrets to use for glitchtip-jira-bridge images
+  value: '[]'
+  required: false
 
 - name: IMAGE_TAG
   description: glitchtip-jira-bridge version
