@@ -10,9 +10,9 @@ objects:
 # ------- WEB DEPLOYMENT --------------------
 - apiVersion: v1
   kind: ServiceAccount
+  imagePullSecrets: "${{IMAGE_PULL_SECRETS}}"
   metadata:
     name: glitchtip-jira-bridge-web
-    imagePullSecrets: "${{IMAGE_PULL_SECRETS}}"
     labels:
       app.kubernetes.io/component: web
       app.kubernetes.io/name: glitchtip-jira-bridge
@@ -118,9 +118,9 @@ objects:
 # --------- WORKER DEPLOYMENT --------------
 - apiVersion: v1
   kind: ServiceAccount
+  imagePullSecrets: "${{IMAGE_PULL_SECRETS}}"
   metadata:
     name: glitchtip-jira-bridge-worker
-    imagePullSecrets: "${{IMAGE_PULL_SECRETS}}"
     labels:
       app.kubernetes.io/component: worker
       app.kubernetes.io/name: glitchtip-jira-bridge
