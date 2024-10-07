@@ -219,6 +219,8 @@ spec:
         value: $(params.dockerfile)
       - name: CONTEXT
         value: $(params.path-context)
+      - name: TARGET_STAGE
+        value: release
       - name: HERMETIC
         value: $(params.hermetic)
       - name: PREFETCH_INPUT
