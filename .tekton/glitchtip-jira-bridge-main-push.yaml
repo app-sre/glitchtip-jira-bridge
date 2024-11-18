@@ -28,7 +28,7 @@ spec:
   - name: path-context
     value: .
   - name: target-stage
-    value: release
+    value: prod
   pipelineRef:
     resolver: git
     params:

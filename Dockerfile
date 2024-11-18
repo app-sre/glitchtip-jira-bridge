@@ -1,66 +1,48 @@
-FROM registry.access.redhat.com/ubi9/ubi-minimal:9.5 as base-python
-ENV PYTHONUNBUFFERED=1
+FROM registry.access.redhat.com/ubi9/python-312 AS base
+COPY LICENSE /licenses/
 
-RUN microdnf upgrade -y && \
-    microdnf install -y \
-        shadow-utils \
-        python3.11 && \
-    microdnf clean all && \
-    update-alternatives --install /usr/bin/python3 python /usr/bin/python3.11 1 && \
-    ln -snf /usr/bin/python3.11 /usr/bin/python && \
-    python3 -m ensurepip
 
-WORKDIR /code
-RUN useradd -u 5000 app && chown -R app:app /code
+#
+# Builder image
+#
+FROM base AS builder
+COPY --from=ghcr.io/astral-sh/uv:0.5.2@sha256:ab5cd8c7946ae6a359a9aea9073b5effd311d40a65310380caae938a1abf55da /uv /bin/uv
 
-# ---- Interims image to get and build all the python dependencies ----
-FROM base-python as build-base-python
-ENV POETRY_HOME=/opt/poetry \
-    POETRY_VIRTUALENVS_CREATE=false \
-    PIP_DISABLE_PIP_VERSION_CHECK=on \
-    PATH=/opt/poetry/bin:$PATH
+ENV \
+    # use venv from ubi image
+    UV_PROJECT_ENVIRONMENT="/opt/app-root" \
+    # compile bytecode for faster startup
+    UV_COMPILE_BYTECODE="true" \
+    # disable uv cache. it doesn't make sense in a container
+    UV_NO_CACHE=true
 
-# install poetry
-RUN python3 - < <(curl -sSL https://install.python-poetry.org) && poetry --version
+COPY pyproject.toml uv.lock ./
+# Test lock file is up to date
+RUN uv lock --locked
+# Install the project dependencies
+RUN uv sync --frozen --no-install-project --no-group dev
 
-# install the dependencies
-RUN microdnf install -y \
-        libcurl-devel \
-        openssl-devel \
-        gcc \
-        python3.11-devel
+COPY README.md app.sh ./
+COPY glitchtip_jira_bridge ./glitchtip_jira_bridge
+RUN uv sync --frozen --no-group dev
 
-# required for poetry to install the dependencies
-COPY --chown=app:app pyproject.toml poetry.lock README.md /code/
-# the code
-COPY --chown=app:app glitchtip_jira_bridge /code/glitchtip_jira_bridge/
-COPY --chown=app:app app.sh /code/
 
-# install the python dependencies
-RUN poetry install --no-interaction --no-ansi --only main
 
-# ---- Bundle everything together in the final image ----
-FROM base-python as release
-EXPOSE 8080
+#
+# Test image
+#
+FROM builder AS test
 
-# get all the python dependencies from the build-python stage
-COPY --from=build-base-python /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
-COPY --from=build-base-python /usr/local/lib64/python3.11/site-packages/ /usr/local/lib64/python3.11/site-packages/
-COPY --from=build-base-python /usr/local/bin/ /usr/local/bin/
+COPY Makefile ./
+RUN uv sync --frozen
 
-RUN microdnf install -y \
-    libcurl-minimal \
-    && microdnf clean all
+COPY tests ./tests
+RUN make test
 
-COPY --from=build-base-python /code/ /code/
-USER app:app
-CMD ["/code/app.sh"]
 
-# ---- Test image ----
-FROM build-base-python as test-image
-# install the test dependencies
-RUN poetry install --no-interaction --no-ansi
-# install the tests
-COPY --chown=app:app tests /code/tests/
-COPY --chown=app:app Makefile /code/
-USER app:app
+#
+# Production image
+#
+FROM base AS prod
+COPY --from=builder /opt/app-root /opt/app-root
+ENTRYPOINT [ "app.sh" ]
