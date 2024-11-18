@@ -178,7 +178,7 @@ objects:
           - name: fluentd-config
             mountPath: /fluentd/etc/
           terminationMessagePolicy: File
-          image: 'quay.io/app-sre/ubi8-ubi-minimal:8.9'
+          image: 'registry.access.redhat.com/ubi9/ubi-minimal:9.5'
           args:
           - |
             # generate fluent.conf
