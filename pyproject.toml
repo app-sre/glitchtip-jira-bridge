@@ -97,6 +97,7 @@ known-first-party = ["glitchtip_jira_bridge"]
 
 # Mypy configuration
 [tool.mypy]
+plugins = ["pydantic.mypy"]
 files = ["glitchtip_jira_bridge", "tests"]
 enable_error_code = ["truthy-bool", "redundant-expr"]
 no_implicit_optional = true

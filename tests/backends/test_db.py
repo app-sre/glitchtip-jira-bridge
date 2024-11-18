@@ -15,7 +15,7 @@ def test_db_get(mocker: MockerFixture) -> None:
     dyn_resource_mock = mocker.MagicMock()
     db = Db(dyn_resource_mock, "table_name")
     item = {"v": "value"}
-    db.table.get_item.side_effect = [{"Item": item}, {}]
+    db.table.get_item.side_effect = [{"Item": item}, {}]  # type: ignore[attr-defined]
 
     assert db.get("pk") == item
     assert db.get("pk") is None
@@ -24,11 +24,11 @@ def test_db_get(mocker: MockerFixture) -> None:
 def test_db_set(mocker: MockerFixture) -> None:
     dyn_resource_mock = mocker.MagicMock()
     db = Db(dyn_resource_mock, "table_name")
-    db.table.put_item.side_effect = [None]
+    db.table.put_item.side_effect = [None]  # type: ignore[attr-defined]
 
     db.set("pk", {"v": "value", "ttl": 1234})
 
-    db.table.put_item.assert_called_once_with(
+    db.table.put_item.assert_called_once_with(  # type: ignore[attr-defined]
         Item={
             "key": "pk",
             "v": "value",
@@ -41,7 +41,7 @@ def test_issue_cache_get(mocker: MockerFixture) -> None:
     cache_backend_mock = mocker.MagicMock()
     issue_cache = IssueCache(cache_backend_mock, 10)
     cache_backend_mock.get.side_effect = [
-        {issue_cache._jira_key_attr: "JIRA-123"},
+        {issue_cache._jira_key_attr: "JIRA-123"},  # noqa: SLF001
         None,
     ]
 
@@ -67,7 +67,7 @@ def test_issue_cache_set(mocker: MockerFixture) -> None:
 
 
 @pytest.mark.parametrize(
-    "db_entry, excpected_is_allowed",
+    ("db_entry", "expected_is_allowed"),
     [
         ({}, True),
         ({"request_count": 9}, True),
@@ -76,10 +76,10 @@ def test_issue_cache_set(mocker: MockerFixture) -> None:
     ],
 )
 def test_limits_is_allowed(
-    mocker: MockerFixture, db_entry: dict[str, Any], excpected_is_allowed: bool
+    mocker: MockerFixture, db_entry: dict[str, Any], *, expected_is_allowed: bool
 ) -> None:
     backend_mock = mocker.MagicMock()
     limits = Limits(backend_mock, 10)
     backend_mock.get.return_value = db_entry
 
-    assert limits.is_allowed("PROJECT") == excpected_is_allowed
+    assert limits.is_allowed("PROJECT") == expected_is_allowed

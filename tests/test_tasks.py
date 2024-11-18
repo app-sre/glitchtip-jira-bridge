@@ -25,7 +25,7 @@ def test_create_jira_ticket(mocker: MockerFixture, issue: Attachment) -> None:
         summary=issue.title,
         description="issue text\n-----\nGlitchtip issue: https://glitchtip.devshift.net/app-sre/issues/12345",
         url="https://glitchtip.devshift.net/app-sre/issues/12345",
-        labels=["glitchtip"] + issue.labels + ["custom-label-1"],
+        labels=["glitchtip", *issue.labels, "custom-label-1"],
         components=["component-1"],
         issue_type="issue-type",
         jira=mocker.ANY,
@@ -42,7 +42,7 @@ def test_create_jira_ticket_retry(mocker: MockerFixture, issue: Attachment) -> N
     mocker.patch("glitchtip_jira_bridge.tasks.JIRA", autospec=True)
     mocker.patch("glitchtip_jira_bridge.tasks.boto3", autospec=True)
 
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError):  # noqa: PT011
         create_jira_ticket(
             jira_project_key="TEST",
             issue=issue,
