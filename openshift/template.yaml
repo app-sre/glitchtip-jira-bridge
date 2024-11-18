@@ -314,7 +314,7 @@ parameters:
 # Global config
 - name: IMAGE
   description: Image to use for glitchtip-jira-bridge
-  value: "quay.io/app-sre/glitchtip-jira-bridge"
+  value: "quay.io/redhat-services-prod/app-sre-tenant/glitchtip-jira-bridge-main/glitchtip-jira-bridge-main"
   required: true
 
 - name: IMAGE_PULL_SECRETS

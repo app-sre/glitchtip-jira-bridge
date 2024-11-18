@@ -14,8 +14,10 @@ services:
       - "${LOCALSTACK_VOLUME_DIR:-./localstack_volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
       - ./localstack:/etc/localstack/init/ready.d
+    networks:
+      - qontract-development
 
-  web:
+  gjb:
     restart: always
     env_file:
       - settings.conf
@@ -25,13 +27,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: release
+      target: prod
     ports:
       - "8080:8080"
     depends_on:
       - localstack
     volumes:
-      - ./glitchtip_jira_bridge:/code/glitchtip_jira_bridge
+      - ./glitchtip_jira_bridge:/opt/app-root/src/glitchtip_jira_bridge
+    networks:
+      - qontract-development
 
   worker:
     restart: always
@@ -45,10 +49,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: release
+      target: prod
     ports:
-      - "8000:8000"
+      - "8001:8001"
     depends_on:
       - localstack
     volumes:
-      - ./glitchtip_jira_bridge:/code/glitchtip_jira_bridge
+      - ./glitchtip_jira_bridge:/opt/app-root/src/glitchtip_jira_bridge
+    networks:
+      - qontract-development
+
+networks:
+  qontract-development:
+    external: true
+    name: qontract-development

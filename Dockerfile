@@ -10,7 +10,7 @@ COPY --from=ghcr.io/astral-sh/uv:0.5.2@sha256:ab5cd8c7946ae6a359a9aea9073b5effd3
 
 ENV \
     # use venv from ubi image
-    UV_PROJECT_ENVIRONMENT="/opt/app-root" \
+    UV_PROJECT_ENVIRONMENT="$APP_ROOT" \
     # compile bytecode for faster startup
     UV_COMPILE_BYTECODE="true" \
     # disable uv cache. it doesn't make sense in a container
@@ -45,4 +45,4 @@ RUN make test
 #
 FROM base AS prod
 COPY --from=builder /opt/app-root /opt/app-root
-ENTRYPOINT [ "app.sh" ]
+ENTRYPOINT [ "./app.sh" ]
