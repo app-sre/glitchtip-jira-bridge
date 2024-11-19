@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Starting GlitchTip Jira Bridge"
+echo "Starting GlitchTip Jira Bridge ..."
 
 if [[ "${GJB_DEBUG}" == "1" ]]; then
     set -x
