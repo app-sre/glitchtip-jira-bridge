@@ -1,3 +1,4 @@
+import pytest
 import requests
 from fastapi.testclient import TestClient
 
@@ -22,7 +23,8 @@ def test_authentication_via_query_param(
     assert response.status_code == requests.codes.unauthorized
 
 
-def test_debug_no_authentication(config_debug: bool, client: TestClient) -> None:
+@pytest.mark.usefixtures("config_debug")
+def test_debug_no_authentication(client: TestClient) -> None:
     response = client.get(
         "/api/v1/", headers={"Authorization": "Bearer does-not-matter"}
     )

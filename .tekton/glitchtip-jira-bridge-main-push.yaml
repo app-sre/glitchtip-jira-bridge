@@ -28,7 +28,16 @@ spec:
   - name: path-context
     value: .
   - name: target-stage
-    value: release
+    value: prod
+  taskRunSpecs:
+  - pipelineTaskName: ecosystem-cert-preflight-checks
+    stepSpecs:
+    - name: check-container
+      computeResources:
+        requests:
+          memory: 4Gi
+        limits:
+          memory: 4Gi
   pipelineRef:
     resolver: git
     params:

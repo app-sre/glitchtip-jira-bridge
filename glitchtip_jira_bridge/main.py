@@ -12,9 +12,9 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from prometheus_fastapi_instrumentator import Instrumentator
 
-from .api import router
-from .config import settings
-from .dependencies import api_key_auth
+from glitchtip_jira_bridge.api import router
+from glitchtip_jira_bridge.config import settings
+from glitchtip_jira_bridge.dependencies import api_key_auth
 
 HOSTNAME = socket.gethostname()
 default_router = APIRouter()
@@ -46,15 +46,15 @@ def create_app() -> FastAPI:
     ).instrument(fast_api_app)
 
     @fast_api_app.on_event("startup")
-    async def _startup() -> None:
+    async def _startup() -> None:  # noqa: RUF029
         instrumentator.expose(fast_api_app, include_in_schema=False)
 
     @fast_api_app.exception_handler(RequestValidationError)
-    async def validation_exception_handler(
+    async def validation_exception_handler(  # noqa: RUF029
         request: Request, exc: RequestValidationError
     ) -> JSONResponse:
         exc_str = f"{exc}".replace("\n", " ").replace("   ", " ")
-        logging.error(f"{request}: {exc_str}")
+        log.error(f"{request}: {exc_str}")
         content = {"status_code": 422, "message": exc_str, "data": None}
         return JSONResponse(
             content=content, status_code=status.HTTP_422_UNPROCESSABLE_ENTITY

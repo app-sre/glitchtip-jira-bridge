@@ -66,7 +66,7 @@ def create_jira_ticket(  # pylint: disable=too-many-arguments
             summary=issue.title,
             description=f"{issue.text}\n-----\nGlitchtip issue: {issue.title_link}",
             url=issue.title_link,
-            labels=["glitchtip"] + issue.labels + custom_labels,
+            labels=["glitchtip", *issue.labels, *custom_labels],
             components=components,
             issue_type=issue_type,
             jira=JIRA(
@@ -92,4 +92,4 @@ def create_jira_ticket(  # pylint: disable=too-many-arguments
         log.exception("Failed to create Jira ticket")
         raise self.retry(
             exc=exc, countdown=settings.retry_delay, max_retries=settings.retries
-        )
+        ) from exc

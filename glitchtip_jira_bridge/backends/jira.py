@@ -8,14 +8,14 @@ from jira import JIRA
 from jira.client import ResultList
 from jira.resources import Issue
 
-from ..metrics import (
+from glitchtip_jira_bridge.backends.db import (
+    IssueCache,
+    Limits,
+)
+from glitchtip_jira_bridge.metrics import (
     limit_reached,
     tickets_created,
     tickets_reopened,
-)
-from .db import (
-    IssueCache,
-    Limits,
 )
 
 log = logging.getLogger(__name__)
@@ -58,7 +58,7 @@ def create_issue(  # pylint: disable=too-many-arguments
             project=project_key,
             summary=summary,
             description=description,
-            labels=labels + [url],
+            labels=[*labels, url],
             issuetype={"name": issue_type},
             **extra_fields,
         )

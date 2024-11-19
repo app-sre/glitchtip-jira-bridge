@@ -1,5 +1,6 @@
 import time
 from datetime import (
+    UTC,
     datetime,
     timedelta,
 )
@@ -10,7 +11,7 @@ if TYPE_CHECKING:
 else:
     DynamoDBServiceResource = object
 
-from ..models import Issue
+from glitchtip_jira_bridge.models import Issue
 
 
 class Db:
@@ -29,7 +30,7 @@ class Db:
 
 
 class IssueCache:
-    def __init__(self, backend: Db, ttl: int):
+    def __init__(self, backend: Db, ttl: int) -> None:
         self.backend = backend
         self.ttl = ttl
         self._jira_key_attr = "jira_key"
@@ -55,13 +56,13 @@ class Limits:
         backend: Db,
         limit: int = 10,
         limit_time_span: timedelta = timedelta(hours=1),
-    ):
+    ) -> None:
         self.backend = backend
         self.limit = limit
         self.limit_time_span = limit_time_span
 
     def is_allowed(self, pk: str) -> bool:
-        in_one_hour = datetime.utcnow() + self.limit_time_span
+        in_one_hour = datetime.now(tz=UTC) + self.limit_time_span
         ttl = int(in_one_hour.timestamp())
 
         if item := self.backend.get(pk):

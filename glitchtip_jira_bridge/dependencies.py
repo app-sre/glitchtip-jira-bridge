@@ -5,7 +5,7 @@ from fastapi import (
 )
 from fastapi.security import OAuth2PasswordBearer
 
-from .config import settings
+from glitchtip_jira_bridge.config import settings
 
 oauth2_scheme = OAuth2PasswordBearer(
     tokenUrl="token", auto_error=False

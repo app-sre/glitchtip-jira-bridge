@@ -178,7 +178,7 @@ objects:
           - name: fluentd-config
             mountPath: /fluentd/etc/
           terminationMessagePolicy: File
-          image: 'quay.io/app-sre/ubi8-ubi-minimal:8.9'
+          image: 'registry.access.redhat.com/ubi9/ubi-minimal:9.5'
           args:
           - |
             # generate fluent.conf
@@ -314,7 +314,7 @@ parameters:
 # Global config
 - name: IMAGE
   description: Image to use for glitchtip-jira-bridge
-  value: "quay.io/app-sre/glitchtip-jira-bridge"
+  value: "quay.io/redhat-services-prod/app-sre-tenant/glitchtip-jira-bridge-main/glitchtip-jira-bridge-main"
   required: true
 
 - name: IMAGE_PULL_SECRETS

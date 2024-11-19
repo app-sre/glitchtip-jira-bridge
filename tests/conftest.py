@@ -35,45 +35,41 @@ def config_debug(settings: Settings) -> bool:
 @pytest.fixture
 def issue() -> Attachment:
     return Attachment(
-        **dict(
-            title="issue title",
-            title_link="https://glitchtip.devshift.net/app-sre/issues/12345",
-            text="issue text",
-            image_url="https://google.com",
-            color="#FF0000",
-            fields=[
-                dict(
-                    title="test",
-                    value="test",
-                    short=True,
-                ),
-                dict(
-                    title="Project",
-                    value="test-project",
-                    short=True,
-                ),
-                dict(
-                    title="Release",
-                    value="test-release",
-                    short=True,
-                ),
-                dict(
-                    title="Environment",
-                    value="test-environment",
-                    short=True,
-                ),
-            ],
-            mrkdown_in=["text"],
-        )
+        title="issue title",
+        title_link="https://glitchtip.devshift.net/app-sre/issues/12345",
+        text="issue text",
+        image_url="https://google.com",
+        color="#FF0000",
+        fields=[
+            {
+                "title": "test",
+                "value": "test",
+                "short": True,
+            },
+            {
+                "title": "Project",
+                "value": "test-project",
+                "short": True,
+            },
+            {
+                "title": "Release",
+                "value": "test-release",
+                "short": True,
+            },
+            {
+                "title": "Environment",
+                "value": "test-environment",
+                "short": True,
+            },
+        ],
+        mrkdown_in=["text"],
     )
 
 
 @pytest.fixture
 def glitchtip_alert(issue: Attachment) -> GlitchtipAlert:
     return GlitchtipAlert(
-        **dict(
-            alias="test alias",
-            text="test text",
-            attachments=[issue.model_dump()],
-        ),
+        alias="test alias",
+        text="test text",
+        attachments=[issue.model_dump()],
     )
