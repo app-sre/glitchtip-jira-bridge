@@ -158,85 +158,12 @@ objects:
                   values:
                   - worker
               topologyKey: "kubernetes.io/hostname"
-        initContainers:
-        - resources:
-            limits:
-              memory: 20Mi
-            requests:
-              cpu: 15m
-              memory: 10Mi
-          name: fluentd-config
-          command:
-          - /bin/sh
-          - '-c'
-          env:
-          - name: SLACK_WEBHOOK_URL
-            value: "${GJB_SLACK_WEBHOOK_URL}"
-          - name: SLACK_ICON_EMOJI
-            value: "${GJB_SLACK_ICON_EMOJI}"
-          volumeMounts:
-          - name: fluentd-config
-            mountPath: /fluentd/etc/
-          terminationMessagePolicy: File
-          image: 'registry.access.redhat.com/ubi9/ubi-minimal:9.5'
-          args:
-          - |
-            # generate fluent.conf
-            cat > /fluentd/etc/fluent.conf <<EOF
-            <source>
-              @type tail
-              path /fluentd/log/integration.log
-              read_from_head true
-              pos_file /fluentd/log/integration.log.pos
-              tag integration
-              <parse>
-                @type none
-              </parse>
-            </source>
-
-            <filter integration>
-              @type grep
-              <regexp>
-                key message
-                pattern /: GJB\]/
-              </regexp>
-            </filter>
-
-            <filter integration>
-              @type grep
-              <exclude>
-                key message
-                pattern /Connected to sqs/
-              </exclude>
-            </filter>
-
-            <filter integration>
-              @type grep
-              <exclude>
-                key message
-                pattern /celery@.*ready/
-              </exclude>
-            </filter>
-
-            #<match integration>
-            #  @type copy
-            #  <store>
-            #    @type slack
-            #    webhook_url ${SLACK_WEBHOOK_URL}
-            #    icon_emoji ${SLACK_ICON_EMOJI}
-            #    flush_interval 10s
-            #    message "\`\`\`[glitchtip-jira-bridge] %s\`\`\`"
-            #  </store>
-            #</match>
-            EOF
         containers:
         - env:
           - name: GJB_START_MODE
             value: worker
           - name: GJB_WORKER_METRICS_PORT
             value: "${GJB_WORKER_METRICS_PORT}"
-          - name: LOG_FILE
-            value: /fluentd/log/integration.log
           envFrom:
             - secretRef:
                 name: glitchtip-jira-bridge-secret
@@ -271,27 +198,6 @@ objects:
               memory: ${{GJB_WORKER_MEMORY_REQUESTS}}
             limits:
               memory: ${{GJB_WORKER_MEMORY_LIMITS}}
-          volumeMounts:
-            - name: logs
-              mountPath: /fluentd/log/
-        - name: fluentd
-          image: 'quay.io/app-sre/fluentd:5ab855d'
-          resources:
-            limits:
-              memory: 120Mi
-            requests:
-              cpu: 15m
-              memory: 30Mi
-          volumeMounts:
-            - name: logs
-              mountPath: /fluentd/log/
-            - name: fluentd-config
-              mountPath: /fluentd/etc/
-        volumes:
-        - name: logs
-          emptyDir: {}
-        - name: fluentd-config
-          emptyDir: {}
 
 # ---------- WORKER SERVICE (PROMETHEUS) -----------
 - apiVersion: v1
@@ -325,16 +231,6 @@ parameters:
 - name: IMAGE_TAG
   description: glitchtip-jira-bridge version
   value: "latest"
-  required: true
-
-- name: GJB_SLACK_WEBHOOK_URL
-  description: Slack webhook url to use
-  value: ""
-  required: false
-
-- name: GJB_SLACK_ICON_EMOJI
-  description: Slack icon emoji to use
-  value: ":app-sre:"
   required: true
 
 # Web config
