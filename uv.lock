@@ -61,15 +61,15 @@ wheels = [
 
 [[package]]
 name = "boto3-stubs"
-version = "1.35.63"
+version = "1.36.9"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "botocore-stubs" },
     { name = "types-s3transfer" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/8e/cf/b4116eefdc95102271df2a47bef1db7ac88d1c1b938648c4302fe817150c/boto3_stubs-1.35.63.tar.gz", hash = "sha256:cc471636d28f595bf750dc3c2079d16e988c9f518a66f50c9d62b0119c3f72cf", size = 92215 }
+sdist = { url = "https://files.pythonhosted.org/packages/e5/96/cb0680e7cc705352d62b51d048aa8de8ebba76a9161c50321a85e2dcee7e/boto3_stubs-1.36.9.tar.gz", hash = "sha256:8f3d85a92f42e8df44f34ec01c7c1622fef9dcd3e85d47ef95a3bcf14129e992", size = 98570 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d5/af/c357c3af2ecc581a5513adcf84c37d1e1f6e79693ff2d56d7d0bf82d485c/boto3_stubs-1.35.63-py3-none-any.whl", hash = "sha256:74663e6087360f49a4da4d2079bca6a809586f44d42238046d5a726c48be4a00", size = 62165 },
+    { url = "https://files.pythonhosted.org/packages/17/37/ab741f20c2a9e5499dfe594e9b9432177c703ac507f8e2a5c73ab76e91ef/boto3_stubs-1.36.9-py3-none-any.whl", hash = "sha256:7000d47322db96f53cb2c5cf8cfe1ac38bb3e3cdce8ba468afed0c36929f78b5", size = 68234 },
 ]
 
 [package.optional-dependencies]
@@ -169,7 +169,7 @@ name = "click"
 version = "8.1.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "platform_system == 'Windows'" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/96/d3/f04c7bfcf5c1862a2a5b845c6b2b360488cf47af55dfa79c98f6a6bf98b5/click-8.1.7.tar.gz", hash = "sha256:ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de", size = 336121 }
 wheels = [
@@ -307,7 +307,7 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "anyio", specifier = "~=4.7.0" },
-    { name = "boto3-stubs", extras = ["dynamodb"], specifier = "~=1.35.63" },
+    { name = "boto3-stubs", extras = ["dynamodb"], specifier = "~=1.36.9" },
     { name = "httpx", specifier = "~=0.28.1" },
     { name = "mypy", specifier = "~=1.13" },
     { name = "pytest", specifier = "~=8.3" },
@@ -462,11 +462,11 @@ wheels = [
 
 [[package]]
 name = "mypy-boto3-dynamodb"
-version = "1.35.60"
+version = "1.36.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/41/e7/09a49462ea33bd31d8d552ffe84f9fffb12ae16b350a54c9b0f9074d218a/mypy_boto3_dynamodb-1.35.60.tar.gz", hash = "sha256:92eac35c49e9f3ff23a4ad6dee5dc54e410e0c49a98b4d93493c7000ebe74568", size = 45142 }
+sdist = { url = "https://files.pythonhosted.org/packages/e6/c1/9a5a4a6ac684e8abc6ae7d316ceeb7c44aa2f0190af43f7344d66767558f/mypy_boto3_dynamodb-1.36.0.tar.gz", hash = "sha256:1687e4689236a5391755126e86ec2596d408eb95408c31ac09a3d1eb289d516d", size = 47132 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e0/a7/8ec2958a20bef1e6956c7420a4eb23059d982149ed14a7f0c9e7a73de404/mypy_boto3_dynamodb-1.35.60-py3-none-any.whl", hash = "sha256:187915c781f352bc79d35b08a094605515ecc54f30107f629972c3358b864a5c", size = 54183 },
+    { url = "https://files.pythonhosted.org/packages/e2/af/1352d3695844388e597107aed65c528ed9e3c891a6fd3b9afd5050428e48/mypy_boto3_dynamodb-1.36.0-py3-none-any.whl", hash = "sha256:b782a817ce8956f8d53ac94c85f969dfe51451fc99f16a3b62776f1e0ed3f1ba", size = 55968 },
 ]
 
 [[package]]
