@@ -1,4 +1,5 @@
 version = 1
+revision = 1
 requires-python = ">=3.12.0, <3.13"
 
 [[package]]
@@ -24,16 +25,16 @@ wheels = [
 
 [[package]]
 name = "anyio"
-version = "4.7.0"
+version = "4.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "idna" },
     { name = "sniffio" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f6/40/318e58f669b1a9e00f5c4453910682e2d9dd594334539c7b7817dabb765f/anyio-4.7.0.tar.gz", hash = "sha256:2f834749c602966b7d456a7567cafcb309f96482b5081d14ac93ccd457f9dd48", size = 177076 }
+sdist = { url = "https://files.pythonhosted.org/packages/a3/73/199a98fc2dae33535d6b8e8e6ec01f8c1d76c9adb096c6b7d64823038cde/anyio-4.8.0.tar.gz", hash = "sha256:1d9fe889df5212298c0c0723fa20479d1b94883a2df44bd3897aa91083316f7a", size = 181126 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a0/7a/4daaf3b6c08ad7ceffea4634ec206faeff697526421c20f07628c7372156/anyio-4.7.0-py3-none-any.whl", hash = "sha256:ea60c3723ab42ba6fff7e8ccb0488c898ec538ff4df1f1d5e642c3601d07e352", size = 93052 },
+    { url = "https://files.pythonhosted.org/packages/46/eb/e7f063ad1fec6b3178a3cd82d1a3c4de82cccf283fc42746168188e1cdd5/anyio-4.8.0-py3-none-any.whl", hash = "sha256:b5011f270ab5eb0abf13385f851315585cc37ef330dd88e27ec3d34d651fd47a", size = 96041 },
 ]
 
 [[package]]
@@ -61,15 +62,15 @@ wheels = [
 
 [[package]]
 name = "boto3-stubs"
-version = "1.35.63"
+version = "1.36.26"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "botocore-stubs" },
     { name = "types-s3transfer" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/8e/cf/b4116eefdc95102271df2a47bef1db7ac88d1c1b938648c4302fe817150c/boto3_stubs-1.35.63.tar.gz", hash = "sha256:cc471636d28f595bf750dc3c2079d16e988c9f518a66f50c9d62b0119c3f72cf", size = 92215 }
+sdist = { url = "https://files.pythonhosted.org/packages/9f/f8/c182ed895b89ec55fb89e56dc79805ba94f5c8399e5de8f6122dc9008cad/boto3_stubs-1.36.26.tar.gz", hash = "sha256:4d9cfbe7c6b55dac5d4509a2e44df1263be9a684c7723d297baffb5f579098a1", size = 98618 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d5/af/c357c3af2ecc581a5513adcf84c37d1e1f6e79693ff2d56d7d0bf82d485c/boto3_stubs-1.35.63-py3-none-any.whl", hash = "sha256:74663e6087360f49a4da4d2079bca6a809586f44d42238046d5a726c48be4a00", size = 62165 },
+    { url = "https://files.pythonhosted.org/packages/b1/7c/ee4948664623be3450d68d237ba629948cc1faaa61edbefa9fabf6918d49/boto3_stubs-1.36.26-py3-none-any.whl", hash = "sha256:ebeb4537c2cebf591ed003b0004db2ec8400718f404ac19ce070844b009633e5", size = 68255 },
 ]
 
 [package.optional-dependencies]
@@ -169,7 +170,7 @@ name = "click"
 version = "8.1.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "platform_system == 'Windows'" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/96/d3/f04c7bfcf5c1862a2a5b845c6b2b360488cf47af55dfa79c98f6a6bf98b5/click-8.1.7.tar.gz", hash = "sha256:ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de", size = 336121 }
 wheels = [
@@ -300,14 +301,14 @@ requires-dist = [
     { name = "prometheus-fastapi-instrumentator", specifier = "~=7.0.0" },
     { name = "pycurl", specifier = "~=7.45.3" },
     { name = "pydantic", specifier = "~=2.10.1" },
-    { name = "pydantic-settings", specifier = "~=2.7.0" },
+    { name = "pydantic-settings", specifier = "~=2.8.0" },
     { name = "uvicorn", specifier = "~=0.34.0" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "anyio", specifier = "~=4.7.0" },
-    { name = "boto3-stubs", extras = ["dynamodb"], specifier = "~=1.35.63" },
+    { name = "anyio", specifier = "~=4.8.0" },
+    { name = "boto3-stubs", extras = ["dynamodb"], specifier = "~=1.36.26" },
     { name = "httpx", specifier = "~=0.28.1" },
     { name = "mypy", specifier = "~=1.13" },
     { name = "pytest", specifier = "~=8.3" },
@@ -462,11 +463,11 @@ wheels = [
 
 [[package]]
 name = "mypy-boto3-dynamodb"
-version = "1.35.60"
+version = "1.36.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/41/e7/09a49462ea33bd31d8d552ffe84f9fffb12ae16b350a54c9b0f9074d218a/mypy_boto3_dynamodb-1.35.60.tar.gz", hash = "sha256:92eac35c49e9f3ff23a4ad6dee5dc54e410e0c49a98b4d93493c7000ebe74568", size = 45142 }
+sdist = { url = "https://files.pythonhosted.org/packages/e6/c1/9a5a4a6ac684e8abc6ae7d316ceeb7c44aa2f0190af43f7344d66767558f/mypy_boto3_dynamodb-1.36.0.tar.gz", hash = "sha256:1687e4689236a5391755126e86ec2596d408eb95408c31ac09a3d1eb289d516d", size = 47132 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e0/a7/8ec2958a20bef1e6956c7420a4eb23059d982149ed14a7f0c9e7a73de404/mypy_boto3_dynamodb-1.35.60-py3-none-any.whl", hash = "sha256:187915c781f352bc79d35b08a094605515ecc54f30107f629972c3358b864a5c", size = 54183 },
+    { url = "https://files.pythonhosted.org/packages/e2/af/1352d3695844388e597107aed65c528ed9e3c891a6fd3b9afd5050428e48/mypy_boto3_dynamodb-1.36.0-py3-none-any.whl", hash = "sha256:b782a817ce8956f8d53ac94c85f969dfe51451fc99f16a3b62776f1e0ed3f1ba", size = 55968 },
 ]
 
 [[package]]
@@ -614,15 +615,15 @@ wheels = [
 
 [[package]]
 name = "pydantic-settings"
-version = "2.7.0"
+version = "2.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pydantic" },
     { name = "python-dotenv" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/86/41/19b62b99e7530cfa1d6ccd16199afd9289a12929bef1a03aa4382b22e683/pydantic_settings-2.7.0.tar.gz", hash = "sha256:ac4bfd4a36831a48dbf8b2d9325425b549a0a6f18cea118436d728eb4f1c4d66", size = 79743 }
+sdist = { url = "https://files.pythonhosted.org/packages/ca/a2/ad2511ede77bb424f3939e5148a56d968cdc6b1462620d24b2a1f4ab65b4/pydantic_settings-2.8.0.tar.gz", hash = "sha256:88e2ca28f6e68ea102c99c3c401d6c9078e68a5df600e97b43891c34e089500a", size = 83347 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f9/00/57b4540deb5c3a39ba689bb519a4e03124b24ab8589e618be4aac2c769bd/pydantic_settings-2.7.0-py3-none-any.whl", hash = "sha256:e00c05d5fa6cbbb227c84bd7487c5c1065084119b750df7c8c1a554aed236eb5", size = 29549 },
+    { url = "https://files.pythonhosted.org/packages/c1/a9/3b9642025174bbe67e900785fb99c9bfe91ea584b0b7126ff99945c24a0e/pydantic_settings-2.8.0-py3-none-any.whl", hash = "sha256:c782c7dc3fb40e97b238e713c25d26f64314aece2e91abcff592fcac15f71820", size = 30746 },
 ]
 
 [[package]]
