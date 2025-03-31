@@ -6,7 +6,7 @@ description = "The Glitchtip-Jira-Bridge seamlessly processes Glitchtip alerts t
 readme = "README.md"
 authors = [{ name = "Christian Assing", email = "cassing@redhat.com" }]
 dependencies = [
-    "celery[sqs] ~=5.4.0",
+    "celery[sqs] ~=5.5.0",
     "fastapi ~=0.115.5",
     "jira ~=3.8.0",
     "prometheus-fastapi-instrumentator ~=7.1.0",
