@@ -30,7 +30,7 @@ dev = [
     "pytest ~=8.3",
     "pytest-cov ~=6.0.0",
     "pytest-mock ~=3.14.0",
-    "rich ~=13.9.4",
+    "rich ~=14.0.0",
     "ruff ~=0.7",
     "types-requests ~=2.32.0",
 ]
