@@ -1,12 +1,11 @@
 import logging
-from typing import (
-    Any,
-    cast,
-)
+from typing import TYPE_CHECKING, Any, cast
 
 from jira import JIRA
-from jira.client import ResultList
-from jira.resources import Issue
+
+if TYPE_CHECKING:
+    from jira.client import ResultList
+    from jira.resources import Issue
 
 from glitchtip_jira_bridge.backends.db import (
     IssueCache,
@@ -39,7 +38,7 @@ def create_issue(  # pylint: disable=too-many-arguments
         return
 
     # ticket not cached, fetch from jira if it exists
-    issues = cast(ResultList[Issue], jira.search_issues(f"labels='{url}'"))
+    issues = cast("ResultList[Issue]", jira.search_issues(f"labels='{url}'"))
     if not issues:
         if not limits.is_allowed(project_key):
             limit_reached.labels(project_key).inc()
