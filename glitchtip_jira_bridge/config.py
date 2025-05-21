@@ -1,3 +1,4 @@
+# ruff: noqa: S105
 from datetime import timedelta
 
 from pydantic_settings import BaseSettings

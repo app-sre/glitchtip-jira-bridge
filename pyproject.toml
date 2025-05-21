@@ -1,6 +1,6 @@
 [project]
 name = "glitchtip-jira-bridge"
-version = "0.2.0"
+version = "0.2.1"
 requires-python = "~= 3.12.0"
 description = "The Glitchtip-Jira-Bridge seamlessly processes Glitchtip alerts through webhooks, transforming them into detailed, actionable Jira tickets."
 readme = "README.md"
