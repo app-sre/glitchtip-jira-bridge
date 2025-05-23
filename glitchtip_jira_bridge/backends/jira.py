@@ -69,7 +69,10 @@ def create_issue(  # pylint: disable=too-many-arguments
             log.warning(f"Found {len(issues)} issues for {url}, taking the first one")
         issue = issues[0]
 
-        if issue.fields.resolution:
+        if (
+            issue.fields.resolution
+            and issue.fields.resolution.name.lower() != "won't do"
+        ):
             log.info(f"Reopening ticket for {url}")
             available_transitions = jira.transitions(issue)
             if not available_transitions:

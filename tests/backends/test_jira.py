@@ -207,7 +207,8 @@ def test_create_issue_ticket_already_cached(mocker: MockerFixture) -> None:
 def test_create_issue_ticket_reopen(mocker: MockerFixture) -> None:
     issue_mock = mocker.MagicMock()
     issue_mock.key = "JIRA-123"
-    issue_mock.fields.resolution = object()
+    issue_mock.fields.resolution = mocker.MagicMock()
+    issue_mock.fields.resolution.name = "Closed"
     jira_mock = mocker.MagicMock()
     jira_mock.search_issues.return_value = [issue_mock]
     jira_mock.create_issue.return_value = issue_mock
@@ -238,6 +239,47 @@ def test_create_issue_ticket_reopen(mocker: MockerFixture) -> None:
     )
     jira_mock.create_issue.assert_not_called()
     jira_mock.transition_issue.assert_called_once_with(issue_mock, "1")
+    issue_cache_mock.set.assert_called_once_with(
+        jira_key="JIRA-123", issue_url="https://glitchtip.example.com/issue/123"
+    )
+    limits_mock.is_allowed.assert_not_called()
+
+
+def test_create_issue_ticket_no_reopen_for_wont_do(mocker: MockerFixture) -> None:
+    issue_mock = mocker.MagicMock()
+    issue_mock.key = "JIRA-123"
+    issue_mock.fields.resolution = mocker.MagicMock()
+    issue_mock.fields.resolution.name = "Won't Do"
+    jira_mock = mocker.MagicMock()
+    jira_mock.search_issues.return_value = [issue_mock]
+    jira_mock.create_issue.return_value = issue_mock
+    jira_mock.transitions.return_value = [{"id": "1"}]
+    issue_cache_mock = mocker.MagicMock()
+    issue_cache_mock.get.return_value = None
+    limits_mock = mocker.MagicMock()
+    limits_mock.is_allowed.return_value = True
+
+    create_issue(
+        project_key="PROJECT",
+        summary="summary",
+        description="description",
+        url="https://glitchtip.example.com/issue/123",
+        labels=["label"],
+        components=["component"],
+        issue_type="issue_type",
+        jira=jira_mock,
+        issue_cache=issue_cache_mock,
+        limits=limits_mock,
+    )
+
+    issue_cache_mock.get.assert_called_once_with(
+        "https://glitchtip.example.com/issue/123"
+    )
+    jira_mock.search_issues.assert_called_once_with(
+        "labels='https://glitchtip.example.com/issue/123'"
+    )
+    jira_mock.create_issue.assert_not_called()
+    jira_mock.transition_issue.assert_not_called()
     issue_cache_mock.set.assert_called_once_with(
         jira_key="JIRA-123", issue_url="https://glitchtip.example.com/issue/123"
     )
