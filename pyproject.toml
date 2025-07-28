@@ -8,7 +8,7 @@ authors = [{ name = "Christian Assing", email = "cassing@redhat.com" }]
 dependencies = [
     "celery[sqs] ~=5.5.0",
     "fastapi ~=0.116.0",
-    "jira ~=3.8.0",
+    "jira ~=3.10.5",
     "prometheus-fastapi-instrumentator ~=7.1.0",
     "pycurl ~=7.45.3",
     "pydantic ~=2.11.1",
@@ -30,7 +30,7 @@ dev = [
     "pytest ~=8.3",
     "pytest-cov ~=6.2.1",
     "pytest-mock ~=3.14.0",
-    "rich ~=14.0.0",
+    "rich ~=14.1.0",
     "ruff ~=0.7",
     "types-requests ~=2.32.0",
 ]
