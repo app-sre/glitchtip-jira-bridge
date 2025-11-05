@@ -7,7 +7,7 @@ readme = "README.md"
 authors = [{ name = "Christian Assing", email = "cassing@redhat.com" }]
 dependencies = [
     "celery[sqs] ~=5.5.0",
-    "fastapi ~=0.120.2",
+    "fastapi ~=0.121.0",
     "jira ~=3.10.5",
     "prometheus-fastapi-instrumentator ~=7.1.0",
     "pycurl ~=7.45.3",
