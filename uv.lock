@@ -48,11 +48,11 @@ wheels = [
 
 [[package]]
 name = "billiard"
-version = "4.2.2"
+version = "4.2.3"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/b9/6a/1405343016bce8354b29d90aad6b0bf6485b5e60404516e4b9a3a9646cf0/billiard-4.2.2.tar.gz", hash = "sha256:e815017a062b714958463e07ba15981d802dc53d41c5b69d28c5a7c238f8ecf3", size = 155592, upload-time = "2025-09-20T14:44:40.456Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/6a/50/cc2b8b6e6433918a6b9a3566483b743dcd229da1e974be9b5f259db3aad7/billiard-4.2.3.tar.gz", hash = "sha256:96486f0885afc38219d02d5f0ccd5bec8226a414b834ab244008cbb0025b8dcb", size = 156450, upload-time = "2025-11-16T17:47:30.281Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a6/80/ef8dff49aae0e4430f81842f7403e14e0ca59db7bbaf7af41245b67c6b25/billiard-4.2.2-py3-none-any.whl", hash = "sha256:4bc05dcf0d1cc6addef470723aac2a6232f3c7ed7475b0b580473a9145829457", size = 86896, upload-time = "2025-09-20T14:44:39.157Z" },
+    { url = "https://files.pythonhosted.org/packages/b3/cc/38b6f87170908bd8aaf9e412b021d17e85f690abe00edf50192f1a4566b9/billiard-4.2.3-py3-none-any.whl", hash = "sha256:989e9b688e3abf153f307b68a1328dfacfb954e30a4f920005654e276c69236b", size = 87042, upload-time = "2025-11-16T17:47:29.005Z" },
 ]
 
 [[package]]
