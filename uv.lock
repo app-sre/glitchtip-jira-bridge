@@ -70,15 +70,15 @@ wheels = [
 
 [[package]]
 name = "boto3-stubs"
-version = "1.41.5"
+version = "1.42.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "botocore-stubs" },
     { name = "types-s3transfer" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9c/2a/e259a37840cfbe066bf9675a9fb712fc745337bef08fbaa3dfb1ad5c21f4/boto3_stubs-1.41.5.tar.gz", hash = "sha256:514a24282147760af1ec6f9035c2c451c91c78817d18457c50d841ee52daa088", size = 100005, upload-time = "2025-11-26T20:38:19.486Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d2/aa/1a7b1993dd620b4b235d682804251d25bc6926b7a43607e771337125f607/boto3_stubs-1.42.4.tar.gz", hash = "sha256:c6c2853e51b3d330fe9862ffaa38e004bede8247e79d97a89bea09df8d0c3608", size = 100822, upload-time = "2025-12-05T20:37:00.364Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a7/13/9b140e3cfe22c6538f46f4e96ac5fa30467117321309a5fe5eea1d09daf7/boto3_stubs-1.41.5-py3-none-any.whl", hash = "sha256:016f45999d6685f8d80f07f24d3a16eab4e50ba153e6cd3398dc290bf968cbca", size = 69296, upload-time = "2025-11-26T20:38:14.254Z" },
+    { url = "https://files.pythonhosted.org/packages/69/ad/12c501726712ad258526a8ea54f5010091f91faca8f0a48a2c1f61d7d564/boto3_stubs-1.42.4-py3-none-any.whl", hash = "sha256:b489ed82a55e71d72d2ae7aee7fedd05e22bc8836360ef9c6d55b610f3bf45d2", size = 69699, upload-time = "2025-12-05T20:36:53.157Z" },
 ]
 
 [package.optional-dependencies]
@@ -278,7 +278,7 @@ wheels = [
 
 [[package]]
 name = "fastapi"
-version = "0.123.10"
+version = "0.124.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "annotated-doc" },
@@ -286,9 +286,9 @@ dependencies = [
     { name = "starlette" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/22/ff/e01087de891010089f1620c916c0c13130f3898177955c13e2b02d22ec4a/fastapi-0.123.10.tar.gz", hash = "sha256:624d384d7cda7c096449c889fc776a0571948ba14c3c929fa8e9a78cd0b0a6a8", size = 356360, upload-time = "2025-12-05T21:27:46.237Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/48/9c/11969bd3e3bc4aa3a711f83dd3720239d3565a934929c74fc32f6c9f3638/fastapi-0.124.0.tar.gz", hash = "sha256:260cd178ad75e6d259991f2fd9b0fee924b224850079df576a3ba604ce58f4e6", size = 357623, upload-time = "2025-12-06T13:11:35.692Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d7/f0/7cb92c4a720def85240fd63fbbcf147ce19e7a731c8e1032376bb5a486ac/fastapi-0.123.10-py3-none-any.whl", hash = "sha256:0503b7b7bc71bc98f7c90c9117d21fdf6147c0d74703011b87936becc86985c1", size = 111774, upload-time = "2025-12-05T21:27:44.78Z" },
+    { url = "https://files.pythonhosted.org/packages/4d/29/9e1e82e16e9a1763d3b55bfbe9b2fa39d7175a1fd97685c482fa402e111d/fastapi-0.124.0-py3-none-any.whl", hash = "sha256:91596bdc6dde303c318f06e8d2bc75eafb341fc793a0c9c92c0bc1db1ac52480", size = 112505, upload-time = "2025-12-06T13:11:34.392Z" },
 ]
 
 [[package]]
@@ -323,7 +323,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "celery", extras = ["sqs"], specifier = "~=5.6.0" },
-    { name = "fastapi", specifier = "~=0.123.0" },
+    { name = "fastapi", specifier = "~=0.124.0" },
     { name = "jira", specifier = "~=3.10.5" },
     { name = "prometheus-fastapi-instrumentator", specifier = "~=7.1.0" },
     { name = "pycurl", specifier = "~=7.45.3" },
@@ -335,7 +335,7 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "anyio", specifier = "~=4.12.0" },
-    { name = "boto3-stubs", extras = ["dynamodb"], specifier = "~=1.41.5" },
+    { name = "boto3-stubs", extras = ["dynamodb"], specifier = "~=1.42.4" },
     { name = "httpx", specifier = "~=0.28.1" },
     { name = "mypy", specifier = "~=1.13" },
     { name = "pytest", specifier = "~=9.0" },
@@ -512,11 +512,11 @@ wheels = [
 
 [[package]]
 name = "mypy-boto3-dynamodb"
-version = "1.41.0"
+version = "1.42.3"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/3a/dd/9ca709c2b9c379fa318b22f641543c163ecf69dc5c9700acaf2b9b5608e3/mypy_boto3_dynamodb-1.41.0.tar.gz", hash = "sha256:e16b04bca9de1f6ea729c8e8bca14d0d14b29cb56b4c1fd626b6745a07a72ea4", size = 47383, upload-time = "2025-11-19T20:50:05.057Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0e/66/deeaa9f84880b7d22c2511d45b51fc84da045db9b13b0986fa874ec92ee0/mypy_boto3_dynamodb-1.42.3.tar.gz", hash = "sha256:6e390b7442eded84279fda6ddb8d8f14d0cfc52c8d16e64dab14e6239acb4a2a", size = 47415, upload-time = "2025-12-04T21:01:17.603Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/63/ad/40c1082addb90ed9bed3f6c1884450e5d03a8d39ed3c010d548471d9a881/mypy_boto3_dynamodb-1.41.0-py3-none-any.whl", hash = "sha256:6ce91ab1b8ca2caa5ff0cae75cdfc8af477727aaa9c963c26d11bb333d3c6a0f", size = 56677, upload-time = "2025-11-19T20:50:02.585Z" },
+    { url = "https://files.pythonhosted.org/packages/e0/fd/a8fa19b246fa68c8fe8bfaec811bc7f889d8f61af43ba740b6b43b250a49/mypy_boto3_dynamodb-1.42.3-py3-none-any.whl", hash = "sha256:ed339bb2a61131531a23d55b85e51fd5aed085fff2d6ce1c36f88988b3a9bef4", size = 56737, upload-time = "2025-12-04T21:01:15.778Z" },
 ]
 
 [[package]]
