@@ -71,7 +71,7 @@ def create_jira_ticket(  # pylint: disable=too-many-arguments
             issue_type=issue_type,
             jira=JIRA(
                 server=settings.jira_api_url,
-                token_auth=settings.jira_api_key,
+                basic_auth=(settings.jira_api_username, settings.jira_api_token),
             ),
             issue_cache=IssueCache(
                 backend=Db(
