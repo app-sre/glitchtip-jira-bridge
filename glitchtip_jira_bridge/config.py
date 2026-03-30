@@ -33,7 +33,8 @@ class Settings(BaseSettings):
 
     # jira config
     jira_api_url: str = "https://issues.stage.redhat.com"
-    jira_api_key: str = ""
+    jira_api_username: str = ""
+    jira_api_token: str = ""
 
     # worker metrics config
     worker_metrics_port: int = 8000
