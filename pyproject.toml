@@ -13,7 +13,7 @@ dependencies = [
     "pycurl ~=7.45.3",
     "pydantic ~=2.12.0",
     "pydantic-settings ~=2.13.1",
-    "uvicorn ~=0.42.0",
+    "uvicorn ~=0.43.0",
 ]
 
 [project.urls]
