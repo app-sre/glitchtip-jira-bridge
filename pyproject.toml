@@ -25,7 +25,7 @@ documentation = "https://github.com/app-sre/glitchtip-jira-bridge"
 dev = [
     "anyio ~=4.13.0",
     "boto3-stubs[dynamodb] ~=1.43.2",
-    "httpx ~=0.28.1",
+    "httpxyz==0.31.2",
     "mypy ~=1.13",
     "pytest ~=9.0",
     "pytest-cov ~=7.1.0",
@@ -111,3 +111,6 @@ disallow_incomplete_defs = true
 [[tool.mypy.overrides]]
 module = ["celery.*"]
 ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+addopts = "-p httpxyz"
