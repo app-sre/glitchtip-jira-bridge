@@ -1,4 +1,7 @@
-from glitchtip_jira_bridge.models import GlitchtipAlert
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from glitchtip_jira_bridge.models import GlitchtipAlert
 
 
 def test_glitchtip_alert(glitchtip_alert: GlitchtipAlert) -> None:

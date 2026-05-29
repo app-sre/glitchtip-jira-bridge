@@ -1,8 +1,8 @@
 import logging
+from typing import TYPE_CHECKING
 
 import boto3
 from celery import Celery
-from celery.app.task import Task
 from jira import JIRA
 
 from .backends.db import (
@@ -13,7 +13,11 @@ from .backends.db import (
 from .backends.jira import create_issue
 from .config import settings
 from .metrics import received_alerts
-from .models import Attachment
+
+if TYPE_CHECKING:
+    from celery.app.task import Task
+
+    from .models import Attachment
 
 log = logging.getLogger(__name__)
 app = Celery(

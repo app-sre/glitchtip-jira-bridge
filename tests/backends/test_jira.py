@@ -1,7 +1,10 @@
-from pytest_mock import MockerFixture
+from typing import TYPE_CHECKING
 
 from glitchtip_jira_bridge.backends.jira import create_issue
 from glitchtip_jira_bridge.models import Issue
+
+if TYPE_CHECKING:
+    from pytest_mock import MockerFixture
 
 
 def test_create_issue_new_ticket(mocker: MockerFixture) -> None:
