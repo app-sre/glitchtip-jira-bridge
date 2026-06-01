@@ -1,6 +1,5 @@
 import logging
-from collections.abc import Callable
-from typing import Annotated
+from typing import TYPE_CHECKING, Annotated
 
 from celery import Task
 from fastapi import (
@@ -11,6 +10,9 @@ from fastapi import (
 
 from glitchtip_jira_bridge.models import GlitchtipAlert
 from glitchtip_jira_bridge.tasks import create_jira_ticket as create_jira_ticket_task
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 router = APIRouter()
 log = logging.getLogger(__name__)

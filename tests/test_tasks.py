@@ -1,8 +1,13 @@
-import pytest
-from pytest_mock import MockerFixture
+from typing import TYPE_CHECKING
 
-from glitchtip_jira_bridge.models import Attachment
+import pytest
+
 from glitchtip_jira_bridge.tasks import create_jira_ticket
+
+if TYPE_CHECKING:
+    from pytest_mock import MockerFixture
+
+    from glitchtip_jira_bridge.models import Attachment
 
 
 def test_create_jira_ticket(mocker: MockerFixture, issue: Attachment) -> None:

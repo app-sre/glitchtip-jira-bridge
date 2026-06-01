@@ -1,7 +1,6 @@
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import pytest
-from pytest_mock import MockerFixture
 
 from glitchtip_jira_bridge.backends.db import (
     Db,
@@ -9,6 +8,9 @@ from glitchtip_jira_bridge.backends.db import (
     Limits,
 )
 from glitchtip_jira_bridge.models import Issue
+
+if TYPE_CHECKING:
+    from pytest_mock import MockerFixture
 
 
 def test_db_get(mocker: MockerFixture) -> None:

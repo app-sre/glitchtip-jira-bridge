@@ -1,16 +1,16 @@
 import logging
 from typing import TYPE_CHECKING, Any, cast
 
-from jira import JIRA
-
 if TYPE_CHECKING:
+    from jira import JIRA
     from jira.client import ResultList
     from jira.resources import Issue
 
-from glitchtip_jira_bridge.backends.db import (
-    IssueCache,
-    Limits,
-)
+    from glitchtip_jira_bridge.backends.db import (
+        IssueCache,
+        Limits,
+    )
+
 from glitchtip_jira_bridge.metrics import (
     limit_reached,
     tickets_created,

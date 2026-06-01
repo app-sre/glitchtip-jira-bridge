@@ -1,7 +1,7 @@
 [project]
 name = "glitchtip-jira-bridge"
-version = "0.2.1"
-requires-python = "~= 3.12.0"
+version = "0.3.0"
+requires-python = "~= 3.14.0"
 description = "The Glitchtip-Jira-Bridge seamlessly processes Glitchtip alerts through webhooks, transforming them into detailed, actionable Jira tickets."
 readme = "README.md"
 authors = [{ name = "Christian Assing", email = "cassing@redhat.com" }]
@@ -95,6 +95,19 @@ preview = true
 
 [tool.ruff.lint.isort]
 known-first-party = ["glitchtip_jira_bridge"]
+
+[tool.ruff.lint.flake8-type-checking]
+runtime-evaluated-base-classes = ["pydantic.BaseModel"]
+runtime-evaluated-decorators = [
+    "fastapi.FastAPI.get",
+    "fastapi.FastAPI.post",
+    "fastapi.FastAPI.put",
+    "fastapi.FastAPI.delete",
+    "fastapi.APIRouter.get",
+    "fastapi.APIRouter.post",
+    "fastapi.APIRouter.put",
+    "fastapi.APIRouter.delete",
+]
 
 # Mypy configuration
 [tool.mypy]

@@ -1,9 +1,13 @@
+from typing import TYPE_CHECKING
+
 import requests
 from celery import Task
-from fastapi.testclient import TestClient
-from pytest_mock import MockerFixture
 
 from glitchtip_jira_bridge.api.v1.alert import get_create_jira_ticket_func
+
+if TYPE_CHECKING:
+    from fastapi.testclient import TestClient
+    from pytest_mock import MockerFixture
 
 
 def test_handle_alert(
