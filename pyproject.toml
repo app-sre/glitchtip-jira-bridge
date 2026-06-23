@@ -89,7 +89,6 @@ ignore = [
     "COM812",
     "COM819",
     "ISC001",
-    "RUF076",  # pytest-fixture-autouse (https://github.com/astral-sh/ruff/issues/26178)
 ]
 [tool.ruff.format]
 preview = true
