@@ -43,7 +43,7 @@ def test_issue_cache_get(mocker: MockerFixture) -> None:
     cache_backend_mock = mocker.MagicMock()
     issue_cache = IssueCache(cache_backend_mock, 10)
     cache_backend_mock.get.side_effect = [
-        {issue_cache._jira_key_attr: "JIRA-123"},  # noqa: SLF001
+        {issue_cache._jira_key_attr: "JIRA-123"},  # ruff: ignore[private-member-access]
         None,
     ]
 
