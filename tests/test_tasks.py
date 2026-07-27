@@ -47,7 +47,7 @@ def test_create_jira_ticket_retry(mocker: MockerFixture, issue: Attachment) -> N
     mocker.patch("glitchtip_jira_bridge.tasks.JIRA", autospec=True)
     mocker.patch("glitchtip_jira_bridge.tasks.boto3", autospec=True)
 
-    with pytest.raises(ValueError):  # noqa: PT011
+    with pytest.raises(ValueError):  # ruff: ignore[pytest-raises-too-broad]
         create_jira_ticket(
             jira_project_key="TEST",
             issue=issue,

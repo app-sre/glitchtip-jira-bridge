@@ -46,11 +46,11 @@ def create_app() -> FastAPI:
     ).instrument(fast_api_app)
 
     @fast_api_app.on_event("startup")
-    async def _startup() -> None:  # noqa: RUF029
+    async def _startup() -> None:  # ruff: ignore[unused-async]
         instrumentator.expose(fast_api_app, include_in_schema=False)
 
     @fast_api_app.exception_handler(RequestValidationError)
-    async def validation_exception_handler(  # noqa: RUF029
+    async def validation_exception_handler(  # ruff: ignore[unused-async]
         request: Request, exc: RequestValidationError
     ) -> JSONResponse:
         exc_str = f"{exc}".replace("\n", " ").replace("   ", " ")

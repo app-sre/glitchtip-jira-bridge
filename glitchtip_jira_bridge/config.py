@@ -1,4 +1,4 @@
-# ruff: noqa: S105
+# ruff: file-ignore[hardcoded-password-string]
 from datetime import timedelta
 
 from pydantic_settings import BaseSettings
