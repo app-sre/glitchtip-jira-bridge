@@ -20,6 +20,11 @@ from glitchtip_jira_bridge.metrics import (
 log = logging.getLogger(__name__)
 
 
+def _escape_jql_string(value: str) -> str:
+    """Escape a value for safe inclusion in a single-quoted JQL string literal."""
+    return value.replace("\\", "\\\\").replace("'", "\\'")
+
+
 def create_issue(  # pylint: disable=too-many-arguments
     project_key: str,
     summary: str,
@@ -38,7 +43,11 @@ def create_issue(  # pylint: disable=too-many-arguments
         return
 
     # ticket not cached, fetch from jira if it exists
-    issues = cast("ResultList[Issue]", jira.search_issues(f"labels='{url}'"))
+    jql = (
+        f"project = '{_escape_jql_string(project_key)}' "
+        f"AND labels = '{_escape_jql_string(url)}'"
+    )
+    issues = cast("ResultList[Issue]", jira.search_issues(jql))
     if not issues:
         if not limits.is_allowed(project_key):
             limit_reached.labels(project_key).inc()

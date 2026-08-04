@@ -7,6 +7,39 @@ if TYPE_CHECKING:
     from pytest_mock import MockerFixture
 
 
+def test_create_issue_escapes_jql_injection_in_url(mocker: MockerFixture) -> None:
+    jira_mock = mocker.MagicMock()
+    jira_mock.search_issues.return_value = []
+    issue_mock = mocker.MagicMock()
+    issue_mock.key = "JIRA-123"
+    issue_mock.fields.resolution = None
+    jira_mock.create_issue.return_value = issue_mock
+    issue_cache_mock = mocker.MagicMock()
+    issue_cache_mock.get.return_value = None
+    limits_mock = mocker.MagicMock()
+    limits_mock.is_allowed.return_value = True
+
+    malicious_url = "https://example.com' OR project=SECRET OR labels='x"
+
+    create_issue(
+        project_key="PROJECT",
+        summary="summary",
+        description="description",
+        url=malicious_url,
+        labels=["label"],
+        components=["component"],
+        issue_type="issue_type",
+        jira=jira_mock,
+        issue_cache=issue_cache_mock,
+        limits=limits_mock,
+    )
+
+    jira_mock.search_issues.assert_called_once_with(
+        "project = 'PROJECT' AND labels = "
+        "'https://example.com\\' OR project=SECRET OR labels=\\'x'"
+    )
+
+
 def test_create_issue_new_ticket(mocker: MockerFixture) -> None:
     jira_mock = mocker.MagicMock()
     jira_mock.search_issues.return_value = []
@@ -36,7 +69,7 @@ def test_create_issue_new_ticket(mocker: MockerFixture) -> None:
         "https://glitchtip.example.com/issue/123"
     )
     jira_mock.search_issues.assert_called_once_with(
-        "labels='https://glitchtip.example.com/issue/123'"
+        "project = 'PROJECT' AND labels = 'https://glitchtip.example.com/issue/123'"
     )
     jira_mock.create_issue.assert_called_once_with(
         project="PROJECT",
@@ -81,7 +114,7 @@ def test_create_issue_new_ticket_no_components(mocker: MockerFixture) -> None:
         "https://glitchtip.example.com/issue/123"
     )
     jira_mock.search_issues.assert_called_once_with(
-        "labels='https://glitchtip.example.com/issue/123'"
+        "project = 'PROJECT' AND labels = 'https://glitchtip.example.com/issue/123'"
     )
     jira_mock.create_issue.assert_called_once_with(
         project="PROJECT",
@@ -125,7 +158,7 @@ def test_create_issue_limits_hit(mocker: MockerFixture) -> None:
         "https://glitchtip.example.com/issue/123"
     )
     jira_mock.search_issues.assert_called_once_with(
-        "labels='https://glitchtip.example.com/issue/123'"
+        "project = 'PROJECT' AND labels = 'https://glitchtip.example.com/issue/123'"
     )
     jira_mock.create_issue.assert_not_called()
     issue_cache_mock.set.assert_not_called()
@@ -161,7 +194,7 @@ def test_create_issue_ticket_exists_but_not_cached(mocker: MockerFixture) -> Non
         "https://glitchtip.example.com/issue/123"
     )
     jira_mock.search_issues.assert_called_once_with(
-        "labels='https://glitchtip.example.com/issue/123'"
+        "project = 'PROJECT' AND labels = 'https://glitchtip.example.com/issue/123'"
     )
     jira_mock.create_issue.assert_not_called()
     issue_cache_mock.set.assert_called_once_with(
@@ -238,7 +271,7 @@ def test_create_issue_ticket_reopen(mocker: MockerFixture) -> None:
         "https://glitchtip.example.com/issue/123"
     )
     jira_mock.search_issues.assert_called_once_with(
-        "labels='https://glitchtip.example.com/issue/123'"
+        "project = 'PROJECT' AND labels = 'https://glitchtip.example.com/issue/123'"
     )
     jira_mock.create_issue.assert_not_called()
     jira_mock.transition_issue.assert_called_once_with(issue_mock, "1")
@@ -279,7 +312,7 @@ def test_create_issue_ticket_no_reopen_for_wont_do(mocker: MockerFixture) -> Non
         "https://glitchtip.example.com/issue/123"
     )
     jira_mock.search_issues.assert_called_once_with(
-        "labels='https://glitchtip.example.com/issue/123'"
+        "project = 'PROJECT' AND labels = 'https://glitchtip.example.com/issue/123'"
     )
     jira_mock.create_issue.assert_not_called()
     jira_mock.transition_issue.assert_not_called()
