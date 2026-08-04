@@ -1,5 +1,5 @@
 import logging
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 import boto3
 from celery import Celery
@@ -13,11 +13,10 @@ from .backends.db import (
 from .backends.jira import create_issue
 from .config import settings
 from .metrics import received_alerts
+from .models import Attachment
 
 if TYPE_CHECKING:
     from celery.app.task import Task
-
-    from .models import Attachment
 
 log = logging.getLogger(__name__)
 app = Celery(
@@ -36,12 +35,11 @@ app = Celery(
     broker_connection_retry_on_startup=True,
     worker_enable_remote_control=False,
     worker_log_format="[%(asctime)s: GJB] %(message)s",
-    # support pydantic models
-    task_serializer="pickle",
-    result_serializer="pickle",
+    task_serializer="json",
+    result_serializer="json",
     event_serializer="json",
-    accept_content=["application/json", "application/x-python-serialize"],
-    result_accept_content=["application/json", "application/x-python-serialize"],
+    accept_content=["application/json"],
+    result_accept_content=["application/json"],
 )
 
 
@@ -49,13 +47,16 @@ app = Celery(
 def create_jira_ticket(  # pylint: disable=too-many-arguments
     self: Task,
     jira_project_key: str,
-    issue: Attachment,
+    issue: dict[str, Any],
     custom_labels: list[str],
     components: list[str],
     issue_type: str,
 ) -> None:
     """Create a Jira ticket."""
-    log.info(f"Handling alert '{issue.text}' for '{jira_project_key}' jira project")
+    attachment = Attachment.model_validate(issue)
+    log.info(
+        f"Handling alert '{attachment.text}' for '{jira_project_key}' jira project"
+    )
     received_alerts.labels(jira_project_key).inc()
     try:
         dynamodb_service_resource = boto3.resource(
@@ -67,10 +68,10 @@ def create_jira_ticket(  # pylint: disable=too-many-arguments
         )
         create_issue(
             project_key=jira_project_key,
-            summary=issue.title,
-            description=f"{issue.text}\n-----\nGlitchtip issue: {issue.title_link}",
-            url=issue.title_link,
-            labels=["glitchtip", *issue.labels, *custom_labels],
+            summary=attachment.title,
+            description=f"{attachment.text}\n-----\nGlitchtip issue: {attachment.title_link}",
+            url=attachment.title_link,
+            labels=["glitchtip", *attachment.labels, *custom_labels],
             components=components,
             issue_type=issue_type,
             jira=JIRA(
