@@ -15,9 +15,14 @@ from prometheus_fastapi_instrumentator import Instrumentator
 from glitchtip_jira_bridge.api import router
 from glitchtip_jira_bridge.config import settings
 from glitchtip_jira_bridge.dependencies import api_key_auth
+from glitchtip_jira_bridge.logging_utils import RedactTokenQueryParamFilter
 
 HOSTNAME = socket.gethostname()
 default_router = APIRouter()
+
+# the API key can be passed as a `?token=` query param (Glitchtip cannot send
+# custom headers), so scrub it from uvicorn's access log before it's written
+logging.getLogger("uvicorn.access").addFilter(RedactTokenQueryParamFilter())
 
 
 @default_router.get("/healthz", include_in_schema=False)
