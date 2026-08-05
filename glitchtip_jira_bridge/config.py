@@ -1,7 +1,18 @@
 # ruff: file-ignore[hardcoded-password-string]
 from datetime import timedelta
+from pathlib import Path
 
 from pydantic_settings import BaseSettings
+
+# OpenShift mounts the glitchtip-jira-bridge-secret Secret here as files (one
+# per key) instead of injecting it via environment variables. Not present in
+# local/dev environments, which keep using env vars (see docker-compose.yml).
+SECRETS_DIR = Path("/var/run/secrets/glitchtip-jira-bridge")
+
+
+def resolve_secrets_dir(path: Path) -> Path | None:
+    """Return `path` if it exists, else None (avoids a pydantic-settings warning)."""
+    return path if path.is_dir() else None
 
 
 class Settings(BaseSettings):
@@ -40,7 +51,10 @@ class Settings(BaseSettings):
     worker_metrics_port: int = 8000
 
     # pydantic config
-    model_config = {"env_prefix": "gjb_"}
+    model_config = {
+        "env_prefix": "gjb_",
+        "secrets_dir": resolve_secrets_dir(SECRETS_DIR),
+    }
 
 
 settings = Settings()
