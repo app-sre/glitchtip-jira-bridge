@@ -40,7 +40,7 @@ def handle_alert(
     for attachment in alert.attachments:
         create_jira_ticket.delay(
             jira_project_key,
-            attachment,
+            attachment.model_dump(),
             labels or [],
             components or [],
             issue_type or "Bug",

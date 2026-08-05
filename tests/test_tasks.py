@@ -2,12 +2,19 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from glitchtip_jira_bridge.tasks import create_jira_ticket
+from glitchtip_jira_bridge.tasks import app, create_jira_ticket
 
 if TYPE_CHECKING:
     from pytest_mock import MockerFixture
 
     from glitchtip_jira_bridge.models import Attachment
+
+
+def test_celery_app_does_not_accept_pickle() -> None:
+    assert app.conf.task_serializer == "json"
+    assert app.conf.result_serializer == "json"
+    assert app.conf.accept_content == ["application/json"]
+    assert app.conf.result_accept_content == ["application/json"]
 
 
 def test_create_jira_ticket(mocker: MockerFixture, issue: Attachment) -> None:
@@ -19,7 +26,7 @@ def test_create_jira_ticket(mocker: MockerFixture, issue: Attachment) -> None:
 
     create_jira_ticket(
         jira_project_key="TEST",
-        issue=issue,
+        issue=issue.model_dump(),
         custom_labels=["custom-label-1"],
         components=["component-1"],
         issue_type="issue-type",
@@ -50,7 +57,7 @@ def test_create_jira_ticket_retry(mocker: MockerFixture, issue: Attachment) -> N
     with pytest.raises(ValueError):  # ruff: ignore[pytest-raises-too-broad]
         create_jira_ticket(
             jira_project_key="TEST",
-            issue=issue,
+            issue=issue.model_dump(),
             custom_labels=["custom-label-1"],
             components=["component-1"],
             issue_type="issue-type",
