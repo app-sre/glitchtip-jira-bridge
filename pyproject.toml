@@ -12,7 +12,7 @@ dependencies = [
     "prometheus-fastapi-instrumentator ~=8.1.0",
     "pycurl ~=7.47.0",
     "pydantic ~=2.13.2",
-    "pydantic-settings ~=2.14.0",
+    "pydantic-settings ~=2.15.0",
     "uvicorn ~=0.52.0",
 ]
 
