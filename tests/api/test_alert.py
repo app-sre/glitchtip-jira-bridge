@@ -21,7 +21,6 @@ def test_handle_alert(
         "/api/v1/alert/JIRA-PROJECT-KEY",
         headers={"Authorization": f"Bearer {config_api_key[0]}"},
         json={
-            "alias": "test alias",
             "text": "test text",
             "attachments": [
                 {
@@ -62,6 +61,45 @@ def test_handle_alert(
     )
 
 
+def test_handle_alert_real_glitchtip_payload(
+    mocker: MockerFixture, config_api_key: list[str], client: TestClient
+) -> None:
+    """Real GlitchTip 6.2.x payload: no top-level `alias`, no attachment `text`."""
+    task_mock = mocker.MagicMock(Task, autospec=True)
+    client.app.dependency_overrides[  # type: ignore[attr-defined]
+        get_create_jira_ticket_func
+    ] = lambda: task_mock
+    response = client.post(
+        "/api/v1/alert/CCXDEV",
+        headers={"Authorization": f"Bearer {config_api_key[0]}"},
+        json={
+            "text": "GlitchTip Alert",
+            "attachments": [
+                {
+                    "title": "kafka: error while consuming ccx.ocp.results/0",
+                    "title_link": "https://glitchtip.devshift.net/ccx/issues/4580574",
+                    "color": "#e52b50",
+                    "fields": [
+                        {
+                            "title": "Project",
+                            "value": "ccx-notification-writer",
+                            "short": True,
+                        },
+                        {
+                            "title": "Environment",
+                            "value": "prod",
+                            "short": True,
+                        },
+                    ],
+                    "mrkdown_in": ["text"],
+                }
+            ],
+        },
+    )
+    assert response.status_code == requests.codes.accepted
+    task_mock.delay.assert_called_once_with("CCXDEV", mocker.ANY, [], [], "Bug")
+
+
 def test_handle_alert_no_optional_fields(
     mocker: MockerFixture, config_api_key: list[str], client: TestClient
 ) -> None:
@@ -73,7 +111,6 @@ def test_handle_alert_no_optional_fields(
         "/api/v1/alert/JIRA-PROJECT-KEY",
         headers={"Authorization": f"Bearer {config_api_key[0]}"},
         json={
-            "alias": "test alias",
             "text": "test text",
             "attachments": [
                 {
