@@ -10,7 +10,7 @@ class Field(BaseModel):
 class Attachment(BaseModel):
     title: str
     title_link: str
-    text: str | None
+    text: str | None = None
     image_url: str | None = None
     color: str | None = None
     fields: list[Field] | None = None
@@ -33,7 +33,6 @@ class Attachment(BaseModel):
 
 
 class GlitchtipAlert(BaseModel):
-    alias: str
     text: str
     attachments: list[Attachment]
     # pydantic config

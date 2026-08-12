@@ -69,7 +69,6 @@ def issue() -> Attachment:
 @pytest.fixture
 def glitchtip_alert(issue: Attachment) -> GlitchtipAlert:
     return GlitchtipAlert(
-        alias="test alias",
         text="test text",
         attachments=[issue.model_dump()],
     )
