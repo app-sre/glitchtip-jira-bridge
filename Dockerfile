@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi10/python-314-minimal@sha256:d907e1e16ec2aa81ef53e12e751af3ecc96ec0f9d08df0f6c757e6c95fe20198 AS base
+FROM registry.access.redhat.com/ubi10/python-314-minimal@sha256:35ade79ab473652e587063682ef69cb92387327dc01315c53f83e597932477aa AS base
 COPY LICENSE /licenses/
 ENV \
     # use venv from ubi image
