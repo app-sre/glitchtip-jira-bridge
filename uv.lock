@@ -34,14 +34,15 @@ wheels = [
 
 [[package]]
 name = "anyio"
-version = "4.14.2"
+version = "4.15.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "idna" },
+    { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/61/cc/a381afa6efea9f496eff839d4a6a1aed3bfafc7b3ab4b0d1b243a12573dd/anyio-4.14.2.tar.gz", hash = "sha256:cfa139f3ed1a23ee8f88a145ddb5ac7605b8bbfd8592baacd7ce3d8bb4313c7f", size = 260176, upload-time = "2026-07-12T20:29:07.082Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a9/d2/f4d173e22df740bc37b1db102b386ba719b66e95b0f0d751f556b387e6d2/anyio-4.15.1.tar.gz", hash = "sha256:9f28306018cbd6d329e64a36d58256edff76dd996fe423bc957326e578b82a94", size = 276966, upload-time = "2026-09-05T10:42:39.44Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/da/35/f2287558c17e29fafc8ef3daf819bb9834061cfa43bff8014f7df7f63bdc/anyio-4.14.2-py3-none-any.whl", hash = "sha256:9f505dda5ac9f0c8309b5e8bd445a8c2bf7246f3ce950121e45ea15bc41d1494", size = 125813, upload-time = "2026-07-12T20:29:05.763Z" },
+    { url = "https://files.pythonhosted.org/packages/12/b8/4bd346e22b28902df4d651910f5242c28d84e4a5c2435ca5c3f797ed7e2e/anyio-4.15.1-py3-none-any.whl", hash = "sha256:6152fdbbf9a77fdec97731721bebf7c4c44f7c29b424b0065826173efc7ed101", size = 132079, upload-time = "2026-09-05T10:42:37.923Z" },
 ]
 
 [[package]]
@@ -432,9 +433,9 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "anyio", specifier = "~=4.14.0" },
+    { name = "anyio", specifier = "~=4.15.0" },
     { name = "boto3-stubs", extras = ["dynamodb"], specifier = "~=1.43.2" },
-    { name = "httpxyz", specifier = "==0.31.2" },
+    { name = "httpxyz", specifier = "==0.42.0" },
     { name = "mypy", specifier = "~=2.1" },
     { name = "pytest", specifier = "~=9.0" },
     { name = "pytest-cov", specifier = "~=7.1.0" },
@@ -468,7 +469,7 @@ wheels = [
 
 [[package]]
 name = "httpxyz"
-version = "0.31.2"
+version = "0.42.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
@@ -476,9 +477,9 @@ dependencies = [
     { name = "httpcorexyz" },
     { name = "idna" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/21/6a/700053e47397c1d7bfa05255e3414ece964b21da2c1f7b622306eabe4dac/httpxyz-0.31.2.tar.gz", hash = "sha256:da96c2f35c724023b9395b1df718f7d52d049b8424a0c919ca0fe2b64dce73a0", size = 149638, upload-time = "2026-05-08T13:21:13.686Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1e/82/d740949e16dd1949f7d4cd88b9957fe21f563537baafedbad3d3fd2140d2/httpxyz-0.42.0.tar.gz", hash = "sha256:ddf2fa49941f3dc4800664f428bd3c309695f80756b1d7fc32806507e7a10c83", size = 150358, upload-time = "2026-09-03T21:18:28.476Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/65/d7/45f259608b8ce844a8a05c5a9f2e363e94d598d7a782d3ad2a7682c11605/httpxyz-0.31.2-py3-none-any.whl", hash = "sha256:1e8058b7324aaf875efb6b4cf5a5a423f4ac101fd4af515349fb4e1d3e4d4441", size = 76949, upload-time = "2026-05-08T13:21:12.471Z" },
+    { url = "https://files.pythonhosted.org/packages/dc/3b/85a9d8fbc391540cad1f589de769f4ea95f7ebb83c465b03724432f370f2/httpxyz-0.42.0-py3-none-any.whl", hash = "sha256:c99f22d7be9b8333a6887a0e951b0705edec29ad0977a7765ca49b59561cad3d", size = 77260, upload-time = "2026-09-03T21:18:27.072Z" },
 ]
 
 [[package]]
