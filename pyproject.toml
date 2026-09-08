@@ -25,7 +25,7 @@ documentation = "https://github.com/app-sre/glitchtip-jira-bridge"
 dev = [
     "anyio ~=4.15.0",
     "boto3-stubs[dynamodb] ~=1.43.2",
-    "httpxyz==0.42.0",
+    "httpxyz==0.42.1",
     "mypy ~=2.1",
     "pytest ~=9.0",
     "pytest-cov ~=7.1.0",
