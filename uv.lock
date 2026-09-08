@@ -435,7 +435,7 @@ requires-dist = [
 dev = [
     { name = "anyio", specifier = "~=4.15.0" },
     { name = "boto3-stubs", extras = ["dynamodb"], specifier = "~=1.43.2" },
-    { name = "httpxyz", specifier = "==0.42.0" },
+    { name = "httpxyz", specifier = "==0.42.1" },
     { name = "mypy", specifier = "~=2.1" },
     { name = "pytest", specifier = "~=9.0" },
     { name = "pytest-cov", specifier = "~=7.1.0" },
@@ -469,7 +469,7 @@ wheels = [
 
 [[package]]
 name = "httpxyz"
-version = "0.42.0"
+version = "0.42.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
@@ -477,9 +477,9 @@ dependencies = [
     { name = "httpcorexyz" },
     { name = "idna" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1e/82/d740949e16dd1949f7d4cd88b9957fe21f563537baafedbad3d3fd2140d2/httpxyz-0.42.0.tar.gz", hash = "sha256:ddf2fa49941f3dc4800664f428bd3c309695f80756b1d7fc32806507e7a10c83", size = 150358, upload-time = "2026-09-03T21:18:28.476Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b4/3f/fa1e461ed228a3281e0ddf69ce87ae269682d8a156b695c2bbbf3ea0fb86/httpxyz-0.42.1.tar.gz", hash = "sha256:194fe5577784983af2bc26a8ffb608bc19d3c6c6260d5972d4c19f801f7a509f", size = 150453, upload-time = "2026-09-04T16:43:43.434Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/dc/3b/85a9d8fbc391540cad1f589de769f4ea95f7ebb83c465b03724432f370f2/httpxyz-0.42.0-py3-none-any.whl", hash = "sha256:c99f22d7be9b8333a6887a0e951b0705edec29ad0977a7765ca49b59561cad3d", size = 77260, upload-time = "2026-09-03T21:18:27.072Z" },
+    { url = "https://files.pythonhosted.org/packages/b2/04/e88efb96c3d44ef5e17c9d76ff2aed850838407e68b02f0f868934e5c364/httpxyz-0.42.1-py3-none-any.whl", hash = "sha256:1140cf26814ecf5da132514cf85f7037d907e46e5888e30fc0068163cd343929", size = 77262, upload-time = "2026-09-04T16:43:41.977Z" },
 ]
 
 [[package]]
