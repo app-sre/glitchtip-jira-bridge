@@ -425,10 +425,10 @@ requires-dist = [
     { name = "fastapi", specifier = "~=0.141.1" },
     { name = "jira", specifier = "~=3.10.5" },
     { name = "prometheus-fastapi-instrumentator", specifier = "~=8.1.0" },
-    { name = "pycurl", specifier = "~=7.47.0" },
+    { name = "pycurl", specifier = "~=7.48.0" },
     { name = "pydantic", specifier = "~=2.13.2" },
     { name = "pydantic-settings", specifier = "~=2.15.0" },
-    { name = "uvicorn", specifier = "~=0.52.0" },
+    { name = "uvicorn", specifier = "~=0.53.0" },
 ]
 
 [package.metadata.requires-dev]
@@ -737,22 +737,22 @@ wheels = [
 
 [[package]]
 name = "pycurl"
-version = "7.47.0"
+version = "7.48.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/81/bc/705aa3bc36b99946a128d068e1afd4b6f3eebb36c6b97f551f3d2d740460/pycurl-7.47.0.tar.gz", hash = "sha256:5e3cf357939da8d4ceefe3c7f305afcf9b47cba66cfd95e7768ca43b38445e14", size = 301499, upload-time = "2026-06-29T18:59:11.712Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/fe/62/5851dbbaba9b8ba69019ee74213f1c31b0b2b7ba643ad48e9407638b0dea/pycurl-7.48.0.tar.gz", hash = "sha256:b70961a76c412cd34f9cc2c9558e63f89fb37045c59eee396c585b52973be280", size = 320614, upload-time = "2026-09-16T17:55:09.121Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2b/c0/c5e60ebf6243213151552b96af2d34d952ba88fce1f160790b31fa915d91/pycurl-7.47.0-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:2679e52599d1104883ff3ba57d3c288a2e63b9e69c3fa99ab2fbb6677a706308", size = 3680804, upload-time = "2026-06-29T18:58:52.35Z" },
-    { url = "https://files.pythonhosted.org/packages/bf/98/7d4b133b5f18b40a4341aa4710299becd18ed6a8740617827255d958ebd2/pycurl-7.47.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:36a1f8e1a293c8cda453724df05d98f95fa85ebc43628e2f85f0d8f90ccdb29a", size = 3788034, upload-time = "2026-06-29T18:58:54.032Z" },
-    { url = "https://files.pythonhosted.org/packages/26/2e/eb2d6b41ae2efd8382dd59bcbbad6fd2ed6e6b39766ea80b5fa736d5359c/pycurl-7.47.0-cp314-cp314-manylinux_2_28_aarch64.whl", hash = "sha256:e9f950b5f33565af3e0fc2023c8e311c0d3dd25701c9402de525931ff67c5101", size = 5427677, upload-time = "2026-06-29T18:58:55.942Z" },
-    { url = "https://files.pythonhosted.org/packages/c3/27/8a5c2e06cd26556679da9e8058caf85761f57eec80b89b8f4206d864c43d/pycurl-7.47.0-cp314-cp314-manylinux_2_28_x86_64.whl", hash = "sha256:36f3ca3e81468ed359f98c5e93af616c9c781f47cf0859563f2a8ec5b51d8795", size = 5130920, upload-time = "2026-06-29T18:58:57.753Z" },
-    { url = "https://files.pythonhosted.org/packages/08/7e/aee8beb76e06998296be5383b7136dc9b6370a09041654353449a355f939/pycurl-7.47.0-cp314-cp314-win_amd64.whl", hash = "sha256:0a073902c9b530ada73a86d04ef553fbeb2ac6c5311c002e61094b669af4dca8", size = 3530533, upload-time = "2026-06-29T18:58:59.365Z" },
-    { url = "https://files.pythonhosted.org/packages/b2/66/3bf50c8c00d5234e680e584293e34fbf80c5518144cf0c05c77fead8d2b7/pycurl-7.47.0-cp314-cp314-win_arm64.whl", hash = "sha256:60ae61b827f272f5fd7bc957e77533002d95e1c601247a4c4b2b7f391eb1571e", size = 3690829, upload-time = "2026-06-29T18:59:00.791Z" },
-    { url = "https://files.pythonhosted.org/packages/38/21/b78db5d43f694a75517fa8d80990162f11658337becedc2374f261f164d7/pycurl-7.47.0-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:ce7648d04766aaacf9ce082eac3d45a4faffae3f905622f69ad9b1d89d8a2c27", size = 3684932, upload-time = "2026-06-29T18:59:02.142Z" },
-    { url = "https://files.pythonhosted.org/packages/93/5e/b40a4b49e2e9a4850736b8f199c4722882fa43ca8994c1d63e4473f2425c/pycurl-7.47.0-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:89bb4492f480b2a5dbd7220d4261c4cc8f6b69604193ef8ac1b11e7267ba9b99", size = 3790659, upload-time = "2026-06-29T18:59:03.588Z" },
-    { url = "https://files.pythonhosted.org/packages/8f/8b/ff8eabd99583af0a2cff0b173e2f53dba6580ee054d496993a88b3d85520/pycurl-7.47.0-cp314-cp314t-manylinux_2_28_aarch64.whl", hash = "sha256:2540c99276b131b2ceb07aedeca06ecee63d7cf80f817bc555ddb51fdc422c21", size = 5514311, upload-time = "2026-06-29T18:59:05.04Z" },
-    { url = "https://files.pythonhosted.org/packages/70/9e/bab826db8ba5f1efa8ee18c546a733bd18dc11227c1bd1e13b7ab9c2eb6d/pycurl-7.47.0-cp314-cp314t-manylinux_2_28_x86_64.whl", hash = "sha256:43517146a604a3f710cb51da555d68ebadf7982083b6557b08d2325f9f7beb2b", size = 5209262, upload-time = "2026-06-29T18:59:06.652Z" },
-    { url = "https://files.pythonhosted.org/packages/5e/c7/48a3c2b98b13b4d80e5380c6ba1960db8ef6e7045c9def4986cb2c83786e/pycurl-7.47.0-cp314-cp314t-win_amd64.whl", hash = "sha256:35da2c8884efb5aed09e13d4b2207f184eb59c27b4ada62f5b3a59ef18262a81", size = 3535073, upload-time = "2026-06-29T18:59:08.355Z" },
-    { url = "https://files.pythonhosted.org/packages/d6/1a/b74d58974829f68ecb6db56574df7423bf5dbf110b4115923fbe4d4caeab/pycurl-7.47.0-cp314-cp314t-win_arm64.whl", hash = "sha256:c6cd58780400e1bed6aad32c542afa4a6901abde116be24b64e5d6cc3fef583e", size = 3695480, upload-time = "2026-06-29T18:59:09.942Z" },
+    { url = "https://files.pythonhosted.org/packages/6b/6a/5e4e7e5e9ba143fb3473ee7adfd3242fc873345e9e06126bd421d8e05bac/pycurl-7.48.0-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:07f1d61dec76475968b2776875d0be1fee02fb7e6098a1c269831623e42a18f1", size = 4924656, upload-time = "2026-09-16T17:54:07.923Z" },
+    { url = "https://files.pythonhosted.org/packages/24/d7/43416130504f369686bb6f051d9c072f35641c062982b61ca14efb1b3d89/pycurl-7.48.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:42853e884e1d42adb9571fd797fc478fca8f32a012e468f71f6c9d3597bc2ded", size = 4940661, upload-time = "2026-09-16T17:54:10.032Z" },
+    { url = "https://files.pythonhosted.org/packages/1c/de/52c09eee00f8a840894d2e6a07ed773b83ce7f1617586298823467c6c556/pycurl-7.48.0-cp314-cp314-manylinux_2_28_aarch64.whl", hash = "sha256:331c051c7702a7943ff25af22fefcd55c600527a249c5b7790c8325c461595ef", size = 6692879, upload-time = "2026-09-16T17:54:12.308Z" },
+    { url = "https://files.pythonhosted.org/packages/06/61/d8533778b30b88caf17b5eb36ac6d1f0c4cb8a0019d42af286f9a208e237/pycurl-7.48.0-cp314-cp314-manylinux_2_28_x86_64.whl", hash = "sha256:c7ffcd5acf2050287657126467a6f79bea43f536c0a851fe92c068e4b938ce24", size = 6387472, upload-time = "2026-09-16T17:54:14.443Z" },
+    { url = "https://files.pythonhosted.org/packages/ff/e3/dc5f19bcb39a7e9dcd9e0135a64699f5039863401df5cf596520e622c331/pycurl-7.48.0-cp314-cp314-win_amd64.whl", hash = "sha256:39ff8b11725caa4d0adb59c8df7ee68384ad3b94167f5710355cb0a1cf4a5b91", size = 18029379, upload-time = "2026-09-16T17:54:17.36Z" },
+    { url = "https://files.pythonhosted.org/packages/92/6e/6d1db0ea20c9320dd6b76c42eec0ef7e3a5d84facf29abd83b64dba06402/pycurl-7.48.0-cp314-cp314-win_arm64.whl", hash = "sha256:a7470c81b483197b68eff922019e5111a9d58d6983c5792ee2f7459aca6fb1fc", size = 18282172, upload-time = "2026-09-16T17:54:21.147Z" },
+    { url = "https://files.pythonhosted.org/packages/c4/3a/2ec29df0d4106d7026c58c504c5797799f7c6dade690524d6ce7c38f74c4/pycurl-7.48.0-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:27db3307c7ee51e4b60ff953bcc7cc5ac4e8f37e92879dc1ba633750f58a6025", size = 4928291, upload-time = "2026-09-16T17:54:23.818Z" },
+    { url = "https://files.pythonhosted.org/packages/db/93/2e26350d277572015f31c47a0932df33f4882a15b6002ed7c7a1639141c7/pycurl-7.48.0-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:899fdfb54f281139b7d7e5213192e1d6eedfa37373d39fa7b5d6e523d68ddcaa", size = 4943829, upload-time = "2026-09-16T17:54:25.952Z" },
+    { url = "https://files.pythonhosted.org/packages/5c/3b/1466e938b3b241ce4d02f74ea2c1b85cb041afe39a18ed284b41bd75b708/pycurl-7.48.0-cp314-cp314t-manylinux_2_28_aarch64.whl", hash = "sha256:f12a2fea62f9b803c7c92cd3a327b229c337a8e87a6e7d5e351136e6844ba9b1", size = 6784238, upload-time = "2026-09-16T17:54:28.181Z" },
+    { url = "https://files.pythonhosted.org/packages/f6/b5/79c10ba9b634cb3995f2291e67afc70173eb974045ec42588dd21eac791a/pycurl-7.48.0-cp314-cp314t-manylinux_2_28_x86_64.whl", hash = "sha256:e00cfc1a687df6b95a91d5fe3b4adcd7e5c4599348d21bdb7ab3b809c8a0184a", size = 6470355, upload-time = "2026-09-16T17:54:30.434Z" },
+    { url = "https://files.pythonhosted.org/packages/16/1b/7668c130af5f33eb967e46944e444170957c572425b885eb6c89d7d793ac/pycurl-7.48.0-cp314-cp314t-win_amd64.whl", hash = "sha256:72971af5dc4d86b957c3bcb30877389a15aaa94653a145412f074c332d2aeaca", size = 18033821, upload-time = "2026-09-16T17:54:33.424Z" },
+    { url = "https://files.pythonhosted.org/packages/16/db/c7e1c2e4868815e5856e5f77ccb4fccaf6f474cea6b5c9ea54d0939c1f0f/pycurl-7.48.0-cp314-cp314t-win_arm64.whl", hash = "sha256:0ae37ba689b520887a41ac39a3f4ca06697fd1f0ea7a1f7be5f26cf657e7dffe", size = 18286746, upload-time = "2026-09-16T17:54:36.833Z" },
 ]
 
 [[package]]
@@ -1091,15 +1091,15 @@ wheels = [
 
 [[package]]
 name = "uvicorn"
-version = "0.52.4"
+version = "0.53.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
     { name = "h11" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f2/0f/3f86e61397dd33bf2ccf28188c40db6a740658aeebbbf6e7dbc101a1f487/uvicorn-0.52.4.tar.gz", hash = "sha256:73acfee47a0b133c5de13d219492d62d8a31e935f4fe6e41a232451a15379f86", size = 100627, upload-time = "2026-08-19T06:27:41.821Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5d/ad/04bbb797c84fc1f26cb171f7394716f4865ffb8d8c5e1eef42565c2dfa6b/uvicorn-0.53.0.tar.gz", hash = "sha256:a9356f0cb89b3b8621529c5d5eebd69bfe154f4c3f68b4cf2de47e45fa855c2e", size = 110881, upload-time = "2026-09-14T07:44:23.815Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f1/79/4a20b54ab0491485ccd8c077db2d39187c7f12b3e15485d38a7be37c81b4/uvicorn-0.52.4-py3-none-any.whl", hash = "sha256:f86e41a149d7d05a9969337e3946a9c171c06a5d42680896daaba624aeac8da1", size = 79871, upload-time = "2026-08-19T06:27:40.36Z" },
+    { url = "https://files.pythonhosted.org/packages/76/18/0eea75741ee812e9f598b687619ce2454f6c3a1c5cd21ea990ec6bd26f45/uvicorn-0.53.0-py3-none-any.whl", hash = "sha256:e8dca71ec86dce5f04e333f0d56cdedf942446e6643b9cea1af0d6d3a02cb03e", size = 87081, upload-time = "2026-09-14T07:44:22.179Z" },
 ]
 
 [[package]]
