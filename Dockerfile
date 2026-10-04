@@ -14,7 +14,7 @@ ENV \
 # Builder image
 #
 FROM base AS builder
-COPY --from=ghcr.io/astral-sh/uv:0.12.22@sha256:f513a91fc62fe7c17567eee97230dd198e43edb8a9fbecca843714a4358fe1bc /uv /bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.12.23@sha256:61d393e44e249f2e4b526b6c7ddcecce245946826e608e11c93ad4f5bba55b21 /uv /bin/uv
 
 COPY pyproject.toml uv.lock ./
 # Test lock file is up to date
@@ -31,7 +31,7 @@ RUN uv sync --frozen --no-group dev
 # Test image
 #
 FROM base AS test
-COPY --from=ghcr.io/astral-sh/uv:0.12.22@sha256:f513a91fc62fe7c17567eee97230dd198e43edb8a9fbecca843714a4358fe1bc /uv /bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.12.23@sha256:61d393e44e249f2e4b526b6c7ddcecce245946826e608e11c93ad4f5bba55b21 /uv /bin/uv
 
 COPY --from=builder $APP_ROOT $APP_ROOT
 
